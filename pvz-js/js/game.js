@@ -1,3 +1,5 @@
+// game.js
+
 const canvas = document.getElementById('canvas1');
 const ctx = canvas.getContext('2d');
 canvas.width = 900;
@@ -13,7 +15,7 @@ let bar = 470;
 let gameOver = false;
 let score = 0;
 const winningScore = 200;
-let chosenDefender = 1;
+let chosenDefender = 0;
 
 const gameGrid = [];
 const defenders = [];
@@ -93,11 +95,18 @@ const defender2 = new Image();
 defender2.src = 'assets/characters/Cactus2/frames000.png'; // convert 'Cactus2.gif[0-14]' frames%03d.png
 defenderArray.push(defender2);
 
+const defender3 = new Image();
+defender3.src = 'assets/characters/Sunflower/frames000.png'; // convert 'SunFlower.gif[0-14]' frames%03d.png
+defenderArray.push(defender3);
+
 let arrLoadedImages = null;
 let arrLoadedImages2 = null;
+let arrLoadedImages3 = null;
+
+const amounts = [50];
 
 class Defender {
-	constructor(x, y){
+	constructor(x, y, amounts){
 		this.x = x;
 		this.y = y;
 		this.width = cellSize - cellGap * 2;
@@ -116,6 +125,14 @@ class Defender {
 		this.chosenDefender = chosenDefender;
 		arrLoadedImages = new personaj();
 		arrLoadedImages2 = [];
+		arrLoadedImages3 = [];
+		amounts = amounts;
+	}
+	getX() {
+		return this.x;
+	}
+	getY() {
+		return this.y;
 	}
 	draw(){
 		//ctx.fillStyle = 'blue';
@@ -130,6 +147,8 @@ class Defender {
 			arrLoadedImages = new personaj(this.chosenDefender, this.frameX, this.spriteWidth, this.spriteHeight, this.x, this.y, this.width, this.height);
 		} else if(this.chosenDefender === 2) {
 			arrLoadedImages2 = new personaj(this.chosenDefender, this.frameX, this.spriteWidth, this.spriteHeight, this.x, this.y, this.width, this.height);
+		} else if(this.chosenDefender === 3) {
+			arrLoadedImages3 = new personaj(this.chosenDefender, this.frameX, this.spriteWidth, this.spriteHeight, this.x, this.y, this.width, this.height);
 		}
 	}
 	update() {
@@ -164,6 +183,16 @@ class Defender {
 				this.miniFrame = 0;
 				this.maxFrame = 14;
 			}
+		} else if(this.chosenDefender === 3) {
+			this.spriteWidth = 74;
+			this.spriteHeight = 73;
+			if(this.shooting) {
+				this.miniFrame = 0;
+				this.maxFrame = 10;
+			} else {
+				this.miniFrame = 0;
+				this.maxFrame = 14;
+			}
 		}
 		if (this.shooting && this.shootNow) {
 			let projectile = 0;
@@ -177,6 +206,11 @@ class Defender {
 			}
 			this.shootNow = false;
 		}
+		if(this.chosenDefender === 3) {
+				if(frame % 300 === 0) {
+					resources.push(new Resource(this.x, this.y)); // cu parametri,
+				}
+			}
 /* vary projectile each 5 fires
 		if (this.shooting && this.shootNow) {
 			projectiles.push(new Projectile(1, this.x + 70, this.y + 50));
@@ -233,16 +267,20 @@ const personaj = class {
 //console.log(frameX);
 				ctx.drawImage(arrLoadedImages[frameX], 0, 0, spriteWidth, spriteHeight, x, y, width, height);
 			}
-			//ctx.fillStyle = 'blue';
-			//ctx.fillRect(x, y, width, height);
 		} else if(chosenDefender === 2) {
 			if(!arrLoadedImages[frameX]) {
 				arrLoadedImages[frameX] = new Image();
 				arrLoadedImages[frameX].src = 'assets/characters/Cactus2/frames0' + (frameX > 9 ? frameX : '0' + frameX) + '.png';
 			}
 			ctx.drawImage(arrLoadedImages[frameX], 0, 0, spriteWidth, spriteHeight, x, y, width, height);
-			//ctx.fillStyle = 'green';
-			//ctx.fillRect(x, y, width, height);
+		} else if(chosenDefender === 3) {
+			if(!arrLoadedImages[frameX]) {
+				arrLoadedImages[frameX] = new Image();
+				arrLoadedImages[frameX].src = 'assets/characters/SunFlower/frames0' + (frameX > 9 ? frameX : '0' + frameX) + '.png';
+			}
+			ctx.drawImage(arrLoadedImages[frameX], 0, 0, spriteWidth, spriteHeight, x, y, width, height);
+		} else {
+			chosenDefender = 0;
 		}
 	}
 
@@ -265,38 +303,65 @@ const card2 = {
 	height: 85
 }
 
+const card3 = {
+	x:170,
+	y:10,
+	width:70,
+	height: 85
+}
+
 	let card1stroke = 'black';
 	let card2stroke = 'black';
+	let card3stroke = 'black';
 
 function chooseDefender() {
 
-	if(collision(mouse, card1) && mouse.clicked) {
-		chosenDefender = 1;
-	} else if(collision(mouse, card2) && mouse.clicked) {
-		chosenDefender = 2;
+	if(mouse.clicked) {
+	//	chosenDefender = 0;
+		if(collision(mouse, card1)) {
+			chosenDefender = 1;
+		} else if(collision(mouse, card2)) {
+			chosenDefender = 2;
+		} else if(collision(mouse, card3)) {
+			chosenDefender = 3;
+		}
 	}
-
+//console.log('chosenDefender', chosenDefender);
 	if(chosenDefender === 1) {
 		card1stroke = 'gold';
 		card2stroke = 'black';
+		card3stroke = 'black';
 	} else if(chosenDefender === 2) {
 		card1stroke = 'black';
 		card2stroke = 'gold';
-	} else if(!chosenDefender && mouse.clicked) {
+		card3stroke = 'black';
+	} else if(chosenDefender === 3) {
 		card1stroke = 'black';
 		card2stroke = 'black';
+		card3stroke = 'gold';
+	} else {
+		card1stroke = 'black';
+		card2stroke = 'black';
+		card3stroke = 'black';
 	}
 
 	ctx.lineWidth = 1;
 	ctx.fillStyle = "rgba(0, 0, 0, 0.4)";
+
 	ctx.fillRect(card1.x, card1.y, card1.width, card1.height);
 	ctx.strokeStyle = card1stroke;
 	ctx.strokeRect(card1.x, card1.y, card1.width, card1.height);
 	ctx.drawImage(defender1, 0, 0, 194, 194, 6, 12, 194, 194);
+
 	ctx.fillRect(card2.x, card2.y, card2.width, card2.height);
 	ctx.strokeStyle = card2stroke;
 	ctx.strokeRect(card2.x, card2.y, card2.width, card2.height);
-	ctx.drawImage(cactus, 0, 0, 194, 194, 75, 7, 194, 194);
+	ctx.drawImage(cactus, 0, 0, 194, 194, 90, 7, 160, 184);
+
+	ctx.fillRect(card3.x, card3.y, card3.width, card3.height);
+	ctx.strokeStyle = card3stroke;
+	ctx.strokeRect(card3.x, card3.y, card3.width, card3.height);
+	ctx.drawImage(defender3, 0, 0, 194, 194, 172, 10, 194, 194);
 }
 
 const bullet = new Image();
@@ -396,10 +461,9 @@ function handleFloatingMessages() {
 
 // enemies
 const enemiesTypes = [];
-const enemy1 = new Image();
-enemy1.src = 'assets/Enemy.gif';
+let enemy1 = []; // convert 'Enemy.gif[0-15]' frames%03d.png
 enemiesTypes.push(enemy1);
-
+/*
 const enemy2 = new Image();
 enemy2.src = 'assets/Enemy2.gif';
 enemiesTypes.push(enemy2);
@@ -407,8 +471,33 @@ enemiesTypes.push(enemy2);
 const enemy3 = new Image();
 enemy3.src = 'assets/Enemy4.gif';
 enemiesTypes.push(enemy3);
+*/
+//console.log(enemiesTypes);
 
-console.log(enemiesTypes);
+class ImgFrameLoader {
+	constructor(type, name, maxFrame) {
+		this.type = String(type);
+		this.name = String(name);
+		this.frames = [];
+		maxFrame = Math.abs(maxFrame);
+		if(maxFrame < 0) {
+			maxFrame = 0;
+		}
+		this.maxFrame = maxFrame;
+	}
+	getFrame(frameNumber) {
+		frameNumber = Math.abs(frameNumber);
+		if(frameNumber > this.maxFrame) {
+			frameNumber = 0;
+		}
+		if(frameNumber >= 0) {
+			if(this.frames[frameNumber] == undefined) {
+				this.frames[frameNumber] = new Image();
+				this.frames[frameNumber].src = 'assets/' + this.type + '/' + this.name + '/frames0' + (this.frameX > 9 ? this.frameX : '0' + this.frameX) + '.png';
+			}
+		}
+	}
+}
 
 class Enemy {
 	constructor(verticalPosition){
@@ -425,6 +514,14 @@ class Enemy {
 		this.frameY = 1;
 		this.miniFrame = 0;
 		this.maxFrame = 15;
+
+
+		if(enemiesTypes[0][this.frameX] == undefined) {
+			enemiesTypes[0][this.frameX] = new Image();
+			enemiesTypes[0][this.frameX].src = 'assets/enemies/Enemy/frames0' + (this.frameX > 9 ? this.frameX : '0' + this.frameX) + '.png';
+		}
+
+		/*
 		if(this.enemiesTypes === enemy1) {
 			//enemy1 property
 			this.maxFrame = 15;
@@ -441,6 +538,7 @@ class Enemy {
 			this.spriteWidth = 106;
 			this.spriteHeight = 126;
 		}
+		*/
 	}
 	update(){
 		this.x -= this.movement;
@@ -495,14 +593,24 @@ function handleEnemies(){
 sun = new Image();
 sun.src = 'assets/sun.png';
 
-const amounts = [50];
 class Resource {
-	constructor(){
-		this.x = Math.random() * (canvas.width - cellSize);
-		this.y = (Math.floor(Math.random() * 5) + 1) * cellSize + 25;
+	constructor(defenderX, defenderY){
+		if(defenderX != undefined) {
+			this.x = defenderX;
+		} else {
+			this.x = Math.random() * (canvas.width - cellSize);
+		}
+		if(defenderY != undefined) {
+			this.y = defenderY;
+		} else {
+			this.y = (Math.floor(Math.random() * 5) + 1) * cellSize + 25;
+		}
 		this.width = cellSize * 0.6;
 		this.height = cellSize * 0.6;
 		this.amount = amounts[Math.floor(Math.random() * amounts.length)];
+	//	let def3 = defenders[0];
+	//	let def3X = def3.getX();
+	//	let def3Y = def3.getY();
 	}
 	draw(){
 		//ctx.fillStyle = 'yellow';
@@ -513,8 +621,8 @@ class Resource {
 	}
 }
 function handleResources(){
-	if (frame % 500 === 0 && score < winningScore){
-		resources.push(new Resource());
+	if (frame % 600 === 0 && score < winningScore) {
+		resources.push(new Resource()); // random, pt ca e fara parametri
 	}
 	for (let i = 0; i < resources.length; i++){
 		resources[i].draw();
@@ -533,8 +641,8 @@ function handleResources(){
 function handleGameStatus(){
 	ctx.fillStyle = 'gold';
 	ctx.font = '30px Orbitron';
-	ctx.fillText('Score: ' + score, 180, 40);
-	ctx.fillText('Resources: ' + numberOfResources, 180, 80);
+	ctx.fillText('Score: ' + score, 280, 40);
+	ctx.fillText('Resources: ' + numberOfResources, 280, 80);
 	if (gameOver){
 		ctx.fillStyle = 'black';
 		ctx.font = '90px Orbitron';
@@ -555,18 +663,22 @@ canvas.addEventListener('click', function(){
 	for (let i = 0; i < defenders.length; i++){
 		if (defenders[i].x === gridPositionX && defenders[i].y === gridPositionY) return;
 	}
-	let defenderCost;
-
+	let defenderCost = 0;
 	if(chosenDefender === 1) {
 		defenderCost = 100;
 	} else if(chosenDefender === 2) {
 		defenderCost = 250;
+	} else if(chosenDefender === 3) {
+		defenderCost = 50;
 	}
-	if (numberOfResources >= defenderCost){
-		defenders.push(new Defender(gridPositionX, gridPositionY));
-		numberOfResources -= defenderCost;
-	} else {
-		floatingMessages.push(new FloatingMessages('Need more resources', mouse.x, mouse.y, 20, 'red'));
+//console.log('chosenDefender=', chosenDefender, 'numberOfResources=', numberOfResources, 'defenderCost=', defenderCost);
+	if(defenderCost > 0) {
+		if (numberOfResources >= defenderCost){
+			defenders.push(new Defender(gridPositionX, gridPositionY));
+			numberOfResources -= defenderCost;
+		} else {
+			floatingMessages.push(new FloatingMessages('Need more resources', mouse.x, mouse.y, 20, 'red'));
+		}
 	}
 });
 
@@ -580,7 +692,7 @@ head.src = "assets/progressBar.png";
 
 function bg(){
 	ctx.drawImage(background,0,0);
-	ctx.fillStyle = "rgba(0, 0, 0, 0.4)";
+	/*ctx.fillStyle = "rgba(0, 0, 0, 0.4)";
 	ctx.fillRect(480, 60, 240, 18);
 	ctx.drawImage(head, bar, 55);
 	if(bar < 700) {
@@ -588,7 +700,7 @@ function bg(){
 	} else {
 		bar = 700;
 		return;
-	}
+	} */
 }
 
 function animate(){
@@ -601,7 +713,7 @@ function animate(){
 	handleResources();
 	handleProjectiles();
 	handleEnemies();
-	chooseDefender()
+	chooseDefender();
 	handleGameStatus();
 	handleFloatingMessages();
 	frame+=0.5;
@@ -623,4 +735,6 @@ function collision(first, second){
 
 window.addEventListener('resize', function(){
 	canvasPosition = canvas.getBoundingClientRect();
-})
+});
+
+// #end
