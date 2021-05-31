@@ -1,9 +1,11 @@
-// ImgFrameLoader.js
+// Enemy.js
 
 // globals: enemiesTypes
 
+console.log('Enemy.js loaded ok');
+
 class Enemy {
-	constructor(verticalPosition){
+	constructor(verticalPosition) {
 		this.x = canvas.width;
 		this.y = verticalPosition;
 		this.width = cellSize - cellGap * 2;
@@ -44,7 +46,7 @@ class Enemy {
 		}
 */
 	}
-	update(frame){
+	update(frame) {
 		this.x -= this.movement;
 		if(frame % 5 === 0) {
 			if(this.frameX < this.maxFrame) {
@@ -54,7 +56,7 @@ class Enemy {
 			}
 		}
 	}
-	draw(ctx){
+	draw(ctx) {
 
 		let frameNum = this.frameX;
 		let animatedPerson = null;

@@ -1,6 +1,8 @@
 // Character.js
 // depends on: ImgFrameLoader
 
+console.log('Character.js loaded ok');
+
 const Character = class {
 
 	constructor(ctx, chosenDefender, shooting, shootNow, frameNum, x, y, width, height) {

@@ -1,5 +1,7 @@
 // ImgFrameLoader.js
 
+console.log('ImgFrameLoader.js loaded ok');
+
 class ImgFrameLoader {
 
 	constructor(type, name, maxFrame) {

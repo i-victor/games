@@ -1,8 +1,10 @@
 // Projectile.js
 
+console.log('Projectile.js loaded ok');
+
 class Projectile {
 
-	constructor(chosenBullet, x, y){
+	constructor(chosenBullet, x, y) {
 		this.chosenBullet = chosenBullet;
 		this.x = x;
 		this.y = y;
@@ -22,14 +24,14 @@ class Projectile {
 
 	}
 
-	update(){
+	update() {
 		this.x += this.speed;
 	}
 
-	draw(ctx){
+	draw(ctx) {
 		if(this.bullet) {
 //alert('a');
-console.log(this.bullet);
+//console.log(this.bullet);
 			ctx.drawImage(this.bullet, this.x, this.y - 40, 25, 24);
 		}
 	}

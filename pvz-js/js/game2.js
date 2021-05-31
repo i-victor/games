@@ -42,11 +42,11 @@ canvas.addEventListener('mouseup', function() {
 	});
 
 let canvasPosition = canvas.getBoundingClientRect();
-canvas.addEventListener('mousemove', function(e){
+canvas.addEventListener('mousemove', function(e) {
 	mouse.x = e.x - canvasPosition.left;
 	mouse.y = e.y - canvasPosition.top;
 });
-canvas.addEventListener('mouseleave', function(){
+canvas.addEventListener('mouseleave', function() {
 	mouse.y = null;
 	mouse.y = null;
 });
@@ -57,29 +57,29 @@ const controlsBar = {
 	height: cellSize,
 }
 class Cell {
-	constructor(x, y){
+	constructor(x, y) {
 		this.x = x;
 		this.y = y;
 		this.width = cellSize;
 		this.height = cellSize;
 	}
-	draw(){
-		if (mouse.x && mouse.y && collision(this, mouse)){
+	draw() {
+		if(mouse.x && mouse.y && collision(this, mouse)) {
 			ctx.strokeStyle = 'black';
 			ctx.strokeRect(this.x, this.y, this.width, this.height);
 		}
 	}
 }
-function createGrid(){
-	for (let y = cellSize; y < canvas.height; y += cellSize){
-		for (let x = 0; x < canvas.width; x += cellSize){
+function createGrid() {
+	for(let y = cellSize; y < canvas.height; y += cellSize) {
+		for(let x = 0; x < canvas.width; x += cellSize) {
 			gameGrid.push(new Cell(x, y));
 		}
 	}
 }
 createGrid();
-function handleGameGrid(){
-	for (let i = 0; i < gameGrid.length; i++){
+function handleGameGrid() {
+	for(let i = 0; i < gameGrid.length; i++) {
 		gameGrid[i].draw();
 	}
 }
@@ -107,28 +107,28 @@ let characterNumber3 = null;
 const amounts = [50];
 
 function handleDefenders() {
-	for (let i = 0; i < defenders.length; i++){
+	for(let i = 0; i < defenders.length; i++) {
 		defenders[i].draw();
 		let projectile = defenders[i].update(frame);
 		if(projectile) {
-			projectiles.push(new Projectile(projectile, this.x + 70, this.y + 50));
+			projectiles.push(new Projectile(projectile, defenders[i].x + 70, defenders[i].y + 50));
 		}
 		if(this.chosenDefender === 3) {
 			if(frame % 300 === 0) {
-				resources.push(new Resource(this.x, this.y)); // TODO: resources.push to change as Game.resources.push
+				resources.push(new Resource(this.x, this.y, amounts)); // TODO: resources.push to change as Game.resources.push
 			}
 		}
-		if (enemyPositions.indexOf(defenders[i].y) !== -1){
+		if(enemyPositions.indexOf(defenders[i].y) !== -1) {
 			defenders[i].shooting = true;
 		} else {
 			defenders[i].shooting = false;
 		}
-		for (let j = 0; j < enemies.length; j++){
-			if (defenders[i] && collision(defenders[i], enemies[j])){
+		for(let j = 0; j < enemies.length; j++) {
+			if(defenders[i] && collision(defenders[i], enemies[j])) {
 				enemies[j].movement = 0;
 				defenders[i].health -= 1;
 			}
-			if (defenders[i] && defenders[i].health <= 0){
+			if(defenders[i] && defenders[i].health <= 0) {
 				defenders.splice(i, 1);
 				i--;
 				enemies[j].movement = enemies[j].speed;
@@ -220,19 +220,19 @@ function chooseDefender() {
 
 
 function handleProjectiles() {
-	for (let i = 0; i < projectiles.length; i++){
+	for(let i = 0; i < projectiles.length; i++) {
 		projectiles[i].update();
 		projectiles[i].draw(ctx);
 
-		for (let j = 0; j < enemies.length; j++){
-			if (enemies[j] && projectiles[i] && collision(projectiles[i], enemies[j])){
+		for(let j = 0; j < enemies.length; j++) {
+			if(enemies[j] && projectiles[i] && collision(projectiles[i], enemies[j])) {
 				enemies[j].health -= projectiles[i].power;
 				projectiles.splice(i, 1);
 				i--;
 			}
 		}
 
-		if (projectiles[i] && projectiles[i].x > canvas.width - cellSize){
+		if(projectiles[i] && projectiles[i].x > canvas.width - cellSize) {
 			projectiles.splice(i, 1);
 			i--;
 		}
@@ -297,14 +297,14 @@ enemiesTypes.push(enemy3);
 //console.log(enemiesTypes);
 
 
-function handleEnemies(){
-	for (let i = 0; i < enemies.length; i++){
+function handleEnemies() {
+	for(let i = 0; i < enemies.length; i++) {
 		enemies[i].update(frame);
 		enemies[i].draw(ctx);
-		if (enemies[i].x < 0){
+		if(enemies[i].x < 0) {
 			gameOver = true;
 		}
-		if (enemies[i].health <= 0){
+		if(enemies[i].health <= 0) {
 			let gainedResources = enemies[i].maxHealth/10;
 			floatingMessages.push(new FloatingMessages('+' + gainedResources, enemies[i].x, enemies[i].y, 30, 'black'));
 			floatingMessages.push(new FloatingMessages('+' + gainedResources, 470, 85, 30, 'gold'));
@@ -316,53 +316,25 @@ function handleEnemies(){
 			i--;
 		  }
 	}
-	if (frame % enemiesInterval === 0 && score < winningScore){
+	if(frame % enemiesInterval === 0 && score < winningScore) {
 		let verticalPosition = Math.floor(Math.random() * 5 + 1) * cellSize + cellGap;
 		enemies.push(new Enemy(verticalPosition));
 		enemyPositions.push(verticalPosition);
-		if (enemiesInterval > 120) enemiesInterval -= 50;
+		if(enemiesInterval > 120) {
+			enemiesInterval -= 50;
+		}
 	}
 }
 
 // resources
 
-sun = new Image();
-sun.src = 'assets/sun.png';
-
-class Resource {
-	constructor(defenderX, defenderY){
-		if(defenderX != undefined) {
-			this.x = defenderX;
-		} else {
-			this.x = Math.random() * (canvas.width - cellSize);
-		}
-		if(defenderY != undefined) {
-			this.y = defenderY;
-		} else {
-			this.y = (Math.floor(Math.random() * 5) + 1) * cellSize + 25;
-		}
-		this.width = cellSize * 0.6;
-		this.height = cellSize * 0.6;
-		this.amount = amounts[Math.floor(Math.random() * amounts.length)];
-	//	let def3 = defenders[0];
-	//	let def3X = def3.getX();
-	//	let def3Y = def3.getY();
-	}
-	draw(){
-		//ctx.fillStyle = 'yellow';
-		//ctx.fillRect(this.x, this.y, this.width, this.height);
-		ctx.drawImage(sun, this.x, this.y, this.width, this.height);
-		ctx.font = '20px Orbitron';
-		//ctx.fillText(this.amount, this.x + 15, this.y + 25);
-	}
-}
-function handleResources(){
-	if (frame % 600 === 0 && score < winningScore) {
+function handleResources() {
+	if(frame % 600 === 0 && score < winningScore) {
 		resources.push(new Resource()); // random, pt ca e fara parametri
 	}
-	for (let i = 0; i < resources.length; i++){
-		resources[i].draw();
-		if (resources[i] && mouse.x && mouse.y && collision(resources[i], mouse)){
+	for(let i = 0; i < resources.length; i++) {
+		resources[i].draw(ctx);
+		if(resources[i] && mouse.x && mouse.y && collision(resources[i], mouse)) {
 			numberOfResources += resources[i].amount;
 			floatingMessages.push(new FloatingMessages('+' + resources[i].amount, resources[i].x, resources[i].y, 30, 'black'));
 			floatingMessages.push(new FloatingMessages('+' + resources[i].amount, 470, 85, 30, 'gold'));
@@ -374,17 +346,17 @@ function handleResources(){
 
 // utilities
 
-function handleGameStatus(){
+function handleGameStatus() {
 	ctx.fillStyle = 'gold';
 	ctx.font = '30px Orbitron';
 	ctx.fillText('Score: ' + score, 280, 40);
 	ctx.fillText('Resources: ' + numberOfResources, 280, 80);
-	if (gameOver){
+	if(gameOver) {
 		ctx.fillStyle = 'black';
 		ctx.font = '90px Orbitron';
 		ctx.fillText('GAME OVER', 135, 330);
 	}
-	if (score >= winningScore && enemies.length === 0){
+	if(score >= winningScore && enemies.length === 0) {
 		ctx.fillStyle = 'black';
 		ctx.font = '60px Orbitron';
 		ctx.fillText('LEVEL COMPLETE', 130, 300);
@@ -392,12 +364,16 @@ function handleGameStatus(){
 	}
 }
 
-canvas.addEventListener('click', function(){
+canvas.addEventListener('click', function() {
 	const gridPositionX = mouse.x  - (mouse.x % cellSize) + cellGap;
 	const gridPositionY = mouse.y - (mouse.y % cellSize) + cellGap;
-	if (gridPositionY < cellSize) return;
-	for (let i = 0; i < defenders.length; i++){
-		if (defenders[i].x === gridPositionX && defenders[i].y === gridPositionY) return;
+	if(gridPositionY < cellSize) {
+		return;
+	}
+	for(let i = 0; i < defenders.length; i++) {
+		if(defenders[i].x === gridPositionX && defenders[i].y === gridPositionY) {
+			return;
+		}
 	}
 	let defenderCost = 0;
 	if(chosenDefender === 1) {
@@ -409,7 +385,7 @@ canvas.addEventListener('click', function(){
 	}
 //console.log('chosenDefender=', chosenDefender, 'numberOfResources=', numberOfResources, 'defenderCost=', defenderCost);
 	if(defenderCost > 0) {
-		if (numberOfResources >= defenderCost){
+		if(numberOfResources >= defenderCost) {
 			defenders.push(new Defender(ctx, chosenDefender, gridPositionX, gridPositionY, cellSize, cellGap));
 			numberOfResources -= defenderCost;
 		} else {
@@ -426,7 +402,7 @@ head.src = "assets/progressBar.png";
 
 // Make sure the image is loaded first otherwise nothing will draw.
 
-function bg(){
+function bg() {
 	ctx.drawImage(background,0,0);
 	/*ctx.fillStyle = "rgba(0, 0, 0, 0.4)";
 	ctx.fillRect(480, 60, 240, 18);
@@ -439,7 +415,7 @@ function bg(){
 	} */
 }
 
-function animate(){
+function animate() {
 	//ctx.clearRect(0, 0, canvas.width, canvas.height);
 	//ctx.fillStyle = 'blue';
 	//ctx.fillRect(0,0,controlsBar.width, controlsBar.height);
@@ -453,13 +429,13 @@ function animate(){
 	handleGameStatus();
 	handleFloatingMessages();
 	frame+=0.5;
-	if (!gameOver) {
+	if(!gameOver) {
 		requestAnimationFrame(animate);
 	}
 }
 animate();
 
-function collision(first, second){
+function collision(first, second) {
 	if (	!(  first.x > second.x + second.width ||
 				first.x + first.width < second.x ||
 				first.y > second.y + second.height ||
@@ -469,7 +445,7 @@ function collision(first, second){
 	};
 };
 
-window.addEventListener('resize', function(){
+window.addEventListener('resize', function() {
 	canvasPosition = canvas.getBoundingClientRect();
 });
 
