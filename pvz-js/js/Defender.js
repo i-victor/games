@@ -42,10 +42,12 @@ class Defender {
 
 		if(frame % 6 === 0) {
 			this.frameNum++;
-			if(this.frameNum === 10) {
+			if(this.frameNum % 10 === 0) {
 				this.shootNow = true;
 			}
 		}
+
+//console.log('frameNum:', this.frameNum);
 
 		let projectile = 0;
 		if(this.shooting && this.shootNow) {

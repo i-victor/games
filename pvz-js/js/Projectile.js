@@ -28,6 +28,8 @@ class Projectile {
 
 	draw(ctx){
 		if(this.bullet) {
+//alert('a');
+console.log(this.bullet);
 			ctx.drawImage(this.bullet, this.x, this.y - 40, 25, 24);
 		}
 	}
