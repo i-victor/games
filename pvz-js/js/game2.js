@@ -97,7 +97,7 @@ defender2.src = 'assets/characters/Cactus2/frames000.png'; // convert 'Cactus2.g
 defenderArray.push(defender2);
 
 const defender3 = new Image();
-defender3.src = 'assets/characters/Sunflower/frames000.png'; // convert 'SunFlower.gif[0-14]' frames%03d.png
+defender3.src = 'assets/characters/SunFlower/frames000.png'; // convert 'SunFlower.gif[0-14]' frames%03d.png
 defenderArray.push(defender3);
 
 let characterNumber1 = null;

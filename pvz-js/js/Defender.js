@@ -53,6 +53,7 @@ class Defender {
 		if(this.shooting && this.shootNow) {
 			if(this.chosenDefender === 1) {
 				projectile = 1;
+				console.log(projectile);
 			} else if(this.chosenDefender === 2) {
 				projectile = 2;
 			}
