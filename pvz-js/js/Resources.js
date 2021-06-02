@@ -20,9 +20,9 @@ class Resource {
 
 		this.height = cellSize * 0.6;
 
-		amounts = [50];
+		amounts = 50;
 
-		this.amount = amounts[Math.floor(Math.random() * amounts.length)];
+		this.amount = amounts;
 	//	let def3 = defenders[0];
 	//	let def3X = def3.getX();
 	//	let def3Y = def3.getY();

@@ -110,12 +110,15 @@ function handleDefenders() {
 	for(let i = 0; i < defenders.length; i++) {
 		defenders[i].draw();
 		let projectile = defenders[i].update(frame);
+		let resource = defenders[i].resource();
 		if(projectile) {
 			projectiles.push(new Projectile(projectile, defenders[i].x + 70, defenders[i].y + 50));
 		}
-		if(this.chosenDefender === 3) {
+		if(resource === 1) {
+			//alert('salut');
 			if(frame % 300 === 0) {
-				resources.push(new Resource(this.x, this.y, amounts)); // TODO: resources.push to change as Game.resources.push
+				//console.log('123');
+				resources.push(new Resource(defenders[i].x, defenders[i].y, amounts)); // TODO: resources.push to change as Game.resources.push
 			}
 		}
 		if(enemyPositions.indexOf(defenders[i].y) !== -1) {
@@ -429,6 +432,7 @@ function animate() {
 	handleGameStatus();
 	handleFloatingMessages();
 	frame+=0.5;
+	//console.log(frame);
 	if(!gameOver) {
 		requestAnimationFrame(animate);
 	}

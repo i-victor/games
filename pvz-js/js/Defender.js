@@ -66,6 +66,18 @@ class Defender {
 
 	} //END FUNCTION
 
+	resource() {
+
+		let resource = 0;
+
+		if(this.chosenDefender === 3) {
+			resource = 1;
+		}
+
+		return resource;
+
+	}
+
 } //END CLASS
 
 // #end js
