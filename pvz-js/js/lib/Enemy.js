@@ -4,7 +4,7 @@
 
 //console.log('Enemy.js loaded ok');
 
-class Enemy {
+const Enemy = class {
 
 	constructor(x, y, cellSize, cellGap) {
 
@@ -90,6 +90,6 @@ class Enemy {
 		}
 	}
 
-}
+};
 
 // #end

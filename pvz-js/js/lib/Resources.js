@@ -2,7 +2,8 @@
 
 //console.log('Resources.js loaded ok');
 
-class Resource {
+const Resource = class {
+
 	constructor(canvas, cellSize, defenderX, defenderY, amounts) {
 
 		if(defenderX != undefined) {
@@ -40,6 +41,6 @@ class Resource {
 		//ctx.fillText(this.amount, this.x + 15, this.y + 25);
 	}//END FUNCTION
 
-}//END CLASS
+}; //END CLASS
 
 // #end js

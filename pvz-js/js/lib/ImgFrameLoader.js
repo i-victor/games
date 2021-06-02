@@ -2,7 +2,7 @@
 
 //console.log('ImgFrameLoader.js loaded ok');
 
-class ImgFrameLoader {
+const ImgFrameLoader = class {
 
 	constructor(type, name, maxFrame) {
 
@@ -40,6 +40,6 @@ class ImgFrameLoader {
 
 	} //END FUNCTION
 
-} //END CLASS
+}; //END CLASS
 
 // #end js

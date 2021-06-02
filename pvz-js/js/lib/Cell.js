@@ -2,7 +2,7 @@
 
 //console.log('Cell.js loaded ok');
 
-class Cell {
+const Cell = class {
 
 	constructor(x, y, cellSize) {
 		this.x = x;
@@ -18,6 +18,6 @@ class Cell {
 		}
 	}
 
-} //END CLASS
+}; //END CLASS
 
 // #end js

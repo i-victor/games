@@ -2,7 +2,7 @@
 
 //console.log('Projectile.js loaded ok');
 
-class Projectile {
+const Projectile = class {
 
 	constructor(chosenBullet, x, y) {
 		this.chosenBullet = chosenBullet;
@@ -35,6 +35,6 @@ class Projectile {
 			ctx.drawImage(this.bullet, this.x, this.y - 40, 25, 24);
 		}
 	}
-}
+};
 
 // #end js

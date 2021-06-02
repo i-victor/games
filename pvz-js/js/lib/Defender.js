@@ -3,7 +3,7 @@
 
 //console.log('Defender.js loaded ok');
 
-class Defender {
+const Defender = class {
 
 	constructor(chosenDefender, x, y, cellSize, cellGap) {
 
@@ -80,6 +80,6 @@ class Defender {
 
 	}
 
-} //END CLASS
+}; //END CLASS
 
 // #end js

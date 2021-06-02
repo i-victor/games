@@ -41,6 +41,6 @@ const Character = class {
 
 	} //end constructor
 
-} //END CLASS
+}; //END CLASS
 
 // #end js

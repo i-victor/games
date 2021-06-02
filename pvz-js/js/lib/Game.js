@@ -2,9 +2,9 @@
 
 //console.log('Game.js loaded ok');
 
-const Game = class{
+const Game = class {
 
-	constructor(canvasId){ // STATIC CLASS
+	constructor(canvasId) { // STATIC CLASS
 		const _$name = 'Game';
 		const _$class = this;
 

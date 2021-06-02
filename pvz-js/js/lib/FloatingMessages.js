@@ -2,7 +2,8 @@
 
 //console.log('FloatingMessages.js loaded ok');
 
-class FloatingMessages {
+const FloatingMessages = class {
+
 	constructor(value, x, y, size, color) {
 		this.value = value;
 		this.x = x;
@@ -28,6 +29,7 @@ class FloatingMessages {
 		ctx.fillText(this.value, this.x, this.y);
 		ctx.globalAlpha = 1;
 	}
-}
+
+};
 
 // #end js
