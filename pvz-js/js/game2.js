@@ -9,6 +9,7 @@ canvas.height = 600;
 const cellSize = 100;
 const cellGap = 3;
 
+let chosenDefender = 0;
 let numberOfResources = 500;
 let enemiesInterval = 600;
 let frame = 0;
@@ -16,7 +17,6 @@ let bar = 470;
 let gameOver = false;
 let score = 0;
 const winningScore = 200;
-let chosenDefender = 0;
 
 const gameGrid = [];
 const defenders = [];
@@ -32,57 +32,59 @@ const mouse = {
 	width: 0.1,
 	height: 0.1,
 	clicked: false
-}
-canvas.addEventListener('mousedown', function() {
-		mouse.clicked = true;
-	});
+};
 
-canvas.addEventListener('mouseup', function() {
-		mouse.clicked = false;
-	});
+canvas.addEventListener('mousedown', () => {
+	mouse.clicked = true;
+});
+
+canvas.addEventListener('mouseup', () => {
+	mouse.clicked = false;
+});
 
 let canvasPosition = canvas.getBoundingClientRect();
-canvas.addEventListener('mousemove', function(e) {
+canvas.addEventListener('mousemove', (e) => {
 	mouse.x = e.x - canvasPosition.left;
 	mouse.y = e.y - canvasPosition.top;
 });
-canvas.addEventListener('mouseleave', function() {
+canvas.addEventListener('mouseleave', () => {
 	mouse.y = null;
 	mouse.y = null;
 });
+
+const collision = (first, second) => {
+	if(
+		! (
+			first.x > second.x + second.width ||
+			first.x + first.width < second.x ||
+			first.y > second.y + second.height ||
+			first.y + first.height < second.y
+		)
+	) {
+		return true;
+	}
+};
 
 // game board
 const controlsBar = {
 	width: canvas.width,
 	height: cellSize,
-}
-class Cell {
-	constructor(x, y) {
-		this.x = x;
-		this.y = y;
-		this.width = cellSize;
-		this.height = cellSize;
-	}
-	draw() {
-		if(mouse.x && mouse.y && collision(this, mouse)) {
-			ctx.strokeStyle = 'black';
-			ctx.strokeRect(this.x, this.y, this.width, this.height);
-		}
-	}
-}
-function createGrid() {
+};
+
+const createGrid = () => {
 	for(let y = cellSize; y < canvas.height; y += cellSize) {
 		for(let x = 0; x < canvas.width; x += cellSize) {
 			gameGrid.push(new Cell(x, y));
 		}
 	}
-}
+};
 createGrid();
-function handleGameGrid() {
+
+const handleGameGrid = () => {
 	for(let i = 0; i < gameGrid.length; i++) {
-		gameGrid[i].draw();
+		gameGrid[i].draw(ctx, mouse);
 	}
-}
+};
 
 // defenders
 
@@ -104,9 +106,9 @@ let characterNumber1 = null;
 let characterNumber2 = null;
 let characterNumber3 = null;
 
-const amounts = [50];
+const amounts = [ 50 ];
 
-function handleDefenders() {
+const handleDefenders = () => {
 	for(let i = 0; i < defenders.length; i++) {
 		defenders[i].draw(ctx);
 		let projectile = defenders[i].update(frame);
@@ -138,41 +140,39 @@ function handleDefenders() {
 			}
 		}
 	}
-}
-
+};
 
 const cactus = new Image();
 cactus.src = 'assets/Cactus.gif';
 
 const card1 = {
-	x:10,
-	y:10,
-	width:70,
-	height: 85
-}
+	x: 10,
+	y: 10,
+	width: 70,
+	height: 85,
+};
 
 const card2 = {
-	x:90,
-	y:10,
-	width:70,
-	height: 85
-}
+	x: 90,
+	y: 10,
+	width: 70,
+	height: 85,
+};
 
 const card3 = {
 	x:170,
 	y:10,
 	width:70,
-	height: 85
-}
+	height: 85,
+};
 
-	let card1stroke = 'black';
-	let card2stroke = 'black';
-	let card3stroke = 'black';
+let card1stroke = 'black';
+let card2stroke = 'black';
+let card3stroke = 'black';
 
-function chooseDefender() {
+const chooseDefender = () => {
 
 	if(mouse.clicked) {
-	//	chosenDefender = 0;
 		if(collision(mouse, card1)) {
 			chosenDefender = 1;
 		} else if(collision(mouse, card2)) {
@@ -181,7 +181,7 @@ function chooseDefender() {
 			chosenDefender = 3;
 		}
 	}
-//console.log('chosenDefender', chosenDefender);
+
 	if(chosenDefender === 1) {
 		card1stroke = 'gold';
 		card2stroke = 'black';
@@ -217,12 +217,11 @@ function chooseDefender() {
 	ctx.strokeStyle = card3stroke;
 	ctx.strokeRect(card3.x, card3.y, card3.width, card3.height);
 	ctx.drawImage(defender3, 0, 0, 194, 194, 172, 10, 194, 194);
-}
+};
 
 // projectiles
 
-
-function handleProjectiles() {
+const handleProjectiles = () => {
 	for(let i = 0; i < projectiles.length; i++) {
 		projectiles[i].update();
 		projectiles[i].draw(ctx);
@@ -240,12 +239,12 @@ function handleProjectiles() {
 			i--;
 		}
 	}
-}
+};
 
 //floating messages
 const floatingMessages = [];
 
-function handleFloatingMessages() {
+const handleFloatingMessages = () => {
 	for(let i = 0; i < floatingMessages.length; i++) {
 		floatingMessages[i].update();
 		floatingMessages[i].draw(ctx);
@@ -254,25 +253,9 @@ function handleFloatingMessages() {
 			i--;
 		}
 	}
-}
+};
 
-// enemies
-const enemiesTypes = [];
-let enemy1 = []; // convert 'Enemy.gif[0-15]' frames%03d.png
-enemiesTypes.push(enemy1);
-/*
-const enemy2 = new Image();
-enemy2.src = 'assets/Enemy2.gif';
-enemiesTypes.push(enemy2);
-
-const enemy3 = new Image();
-enemy3.src = 'assets/Enemy4.gif';
-enemiesTypes.push(enemy3);
-*/
-//console.log(enemiesTypes);
-
-
-function handleEnemies() {
+const handleEnemies = () => {
 	for(let i = 0; i < enemies.length; i++) {
 		enemies[i].update(frame);
 		enemies[i].draw(ctx);
@@ -285,8 +268,8 @@ function handleEnemies() {
 			floatingMessages.push(new FloatingMessages('+' + gainedResources, 470, 85, 30, 'gold'));
 			numberOfResources += gainedResources;
 			score += gainedResources;
-			const findThisIndex = enemyPositions.indexOf(enemies[i].y);
-			enemyPositions.splice(findThisIndex, 1);
+			let findCurrentIndex = enemyPositions.indexOf(enemies[i].y);
+			enemyPositions.splice(findCurrentIndex, 1);
 			enemies.splice(i, 1);
 			i--;
 		  }
@@ -299,11 +282,11 @@ function handleEnemies() {
 			enemiesInterval -= 50;
 		}
 	}
-}
+};
 
 // resources
 
-function handleResources() {
+const handleResources = () => {
 	if(frame % 600 === 0 && score < winningScore) {
 		resources.push(new Resource()); // random, pt ca e fara parametri
 	}
@@ -317,11 +300,11 @@ function handleResources() {
 			i--;
 		}
 	}
-}
+};
 
 // utilities
 
-function handleGameStatus() {
+const handleGameStatus = () => {
 	ctx.fillStyle = 'gold';
 	ctx.font = '30px Orbitron';
 	ctx.fillText('Score: ' + score, 280, 40);
@@ -337,9 +320,9 @@ function handleGameStatus() {
 		ctx.fillText('LEVEL COMPLETE', 130, 300);
 		ctx.font = '30px Orbitron';
 	}
-}
+};
 
-canvas.addEventListener('click', function() {
+canvas.addEventListener('click', () => {
 	const gridPositionX = mouse.x  - (mouse.x % cellSize) + cellGap;
 	const gridPositionY = mouse.y - (mouse.y % cellSize) + cellGap;
 	if(gridPositionY < cellSize) {
@@ -358,7 +341,6 @@ canvas.addEventListener('click', function() {
 	} else if(chosenDefender === 3) {
 		defenderCost = 50;
 	}
-//console.log('chosenDefender=', chosenDefender, 'numberOfResources=', numberOfResources, 'defenderCost=', defenderCost);
 	if(defenderCost > 0) {
 		if(numberOfResources >= defenderCost) {
 			defenders.push(new Defender(chosenDefender, gridPositionX, gridPositionY, cellSize, cellGap));
@@ -369,15 +351,15 @@ canvas.addEventListener('click', function() {
 	}
 });
 
-var background = new Image();
+const background = new Image();
 background.src = "assets/bg.jpeg";
 
-var head = new Image();
+const head = new Image();
 head.src = "assets/progressBar.png";
 
 // Make sure the image is loaded first otherwise nothing will draw.
 
-function bg() {
+const bg = () => {
 	ctx.drawImage(background,0,0);
 	/*ctx.fillStyle = "rgba(0, 0, 0, 0.4)";
 	ctx.fillRect(480, 60, 240, 18);
@@ -388,9 +370,9 @@ function bg() {
 		bar = 700;
 		return;
 	} */
-}
+};
 
-function animate() {
+const animate = () => {
 	//ctx.clearRect(0, 0, canvas.width, canvas.height);
 	//ctx.fillStyle = 'blue';
 	//ctx.fillRect(0,0,controlsBar.width, controlsBar.height);
@@ -408,20 +390,10 @@ function animate() {
 	if(!gameOver) {
 		requestAnimationFrame(animate);
 	}
-}
+};
 animate();
 
-function collision(first, second) {
-	if (	!(  first.x > second.x + second.width ||
-				first.x + first.width < second.x ||
-				first.y > second.y + second.height ||
-				first.y + first.height < second.y)
-	) {
-	return true;
-	};
-};
-
-window.addEventListener('resize', function() {
+window.addEventListener('resize', () => {
 	canvasPosition = canvas.getBoundingClientRect();
 });
 
