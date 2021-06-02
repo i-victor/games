@@ -108,7 +108,7 @@ const amounts = [50];
 
 function handleDefenders() {
 	for(let i = 0; i < defenders.length; i++) {
-		defenders[i].draw();
+		defenders[i].draw(ctx);
 		let projectile = defenders[i].update(frame);
 		let resource = defenders[i].resource();
 		if(projectile) {
@@ -245,38 +245,10 @@ function handleProjectiles() {
 //floating messages
 const floatingMessages = [];
 
-class FloatingMessages {
-	constructor(value, x, y, size, color) {
-		this.value = value;
-		this.x = x;
-		this.y = y;
-		this.size = size;
-		this.lifeSpan = 0;
-		this.color = color;
-		this.opacity = 1;
-	}
-
-	update() {
-		this.y -= 0.3;
-		this.lifeSpan += 1;
-		if(this.opacity > 0.03) {
-			this.opacity -= 0.03;
-		}
-	}
-
-	draw() {
-		ctx.globalAlpha = this.opacity;
-		ctx.fillStyle = this.color;
-		ctx.font = this.size + 'px Orbitron';
-		ctx.fillText(this.value, this.x, this.y);
-		ctx.globalAlpha = 1;
-	}
-}
-
 function handleFloatingMessages() {
 	for(let i = 0; i < floatingMessages.length; i++) {
 		floatingMessages[i].update();
-		floatingMessages[i].draw();
+		floatingMessages[i].draw(ctx);
 		if(floatingMessages[i].lifeSpan >= 50) {
 			floatingMessages.splice(i, 1);
 			i--;
@@ -321,7 +293,7 @@ function handleEnemies() {
 	}
 	if(frame % enemiesInterval === 0 && score < winningScore) {
 		let verticalPosition = Math.floor(Math.random() * 5 + 1) * cellSize + cellGap;
-		enemies.push(new Enemy(verticalPosition));
+		enemies.push(new Enemy(canvas.width, verticalPosition, cellSize, cellGap));
 		enemyPositions.push(verticalPosition);
 		if(enemiesInterval > 120) {
 			enemiesInterval -= 50;
@@ -389,7 +361,7 @@ canvas.addEventListener('click', function() {
 //console.log('chosenDefender=', chosenDefender, 'numberOfResources=', numberOfResources, 'defenderCost=', defenderCost);
 	if(defenderCost > 0) {
 		if(numberOfResources >= defenderCost) {
-			defenders.push(new Defender(ctx, chosenDefender, gridPositionX, gridPositionY, cellSize, cellGap));
+			defenders.push(new Defender(chosenDefender, gridPositionX, gridPositionY, cellSize, cellGap));
 			numberOfResources -= defenderCost;
 		} else {
 			floatingMessages.push(new FloatingMessages('Need more resources', mouse.x, mouse.y, 20, 'red'));

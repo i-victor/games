@@ -37,7 +37,6 @@ const Character = class {
 
 		if(animatedFrame) {
 			ctx.drawImage(animatedFrame, 0, 0, spriteWidth, spriteHeight, x, y, width, height);
-
 		}
 
 	} //end constructor

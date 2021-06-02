@@ -5,7 +5,7 @@ console.log('Defender.js loaded ok');
 
 class Defender {
 
-	constructor(ctx, chosenDefender, x, y, cellSize, cellGap) {
+	constructor(chosenDefender, x, y, cellSize, cellGap) {
 
 		this.x = x;
 		this.y = y;
@@ -28,7 +28,7 @@ class Defender {
 
 	} //END FUNCTION
 
-	draw() {
+	draw(ctx) {
 
 		if(this.chosenDefender === 1) {
 			characterNumber1 = new Character(ctx, this.chosenDefender, this.shooting, this.shootNow, this.frameNum, this.x, this.y, this.width, this.height);
@@ -48,8 +48,6 @@ class Defender {
 				this.shootNow = true;
 			}
 		}
-
-//console.log('frameNum:', this.frameNum);
 
 		let projectile = 0;
 		if(this.shooting && this.shootNow) {
