@@ -1,6 +1,6 @@
 // FloatingMessages.js
 
-console.log('FloatingMessages.js loaded ok');
+//console.log('FloatingMessages.js loaded ok');
 
 class FloatingMessages {
 	constructor(value, x, y, size, color) {

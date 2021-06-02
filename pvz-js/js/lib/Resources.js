@@ -1,9 +1,9 @@
 // Resource.js
 
-console.log('Resources.js loaded ok');
+//console.log('Resources.js loaded ok');
 
 class Resource {
-	constructor(defenderX, defenderY, amounts) {
+	constructor(canvas, cellSize, defenderX, defenderY, amounts) {
 
 		if(defenderX != undefined) {
 			this.x = defenderX;

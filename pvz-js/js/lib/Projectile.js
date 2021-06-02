@@ -1,6 +1,6 @@
 // Projectile.js
 
-console.log('Projectile.js loaded ok');
+//console.log('Projectile.js loaded ok');
 
 class Projectile {
 

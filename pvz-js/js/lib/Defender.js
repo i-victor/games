@@ -1,7 +1,7 @@
 // Defender.js
 // depends on: Character, Resources
 
-console.log('Defender.js loaded ok');
+//console.log('Defender.js loaded ok');
 
 class Defender {
 
@@ -29,6 +29,10 @@ class Defender {
 	} //END FUNCTION
 
 	draw(ctx) {
+
+		let characterNumber1 = null;
+		let characterNumber2 = null;
+		let characterNumber3 = null;
 
 		if(this.chosenDefender === 1) {
 			characterNumber1 = new Character(ctx, this.chosenDefender, this.shooting, this.shootNow, this.frameNum, this.x, this.y, this.width, this.height);

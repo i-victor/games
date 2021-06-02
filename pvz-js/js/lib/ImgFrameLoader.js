@@ -1,6 +1,6 @@
 // ImgFrameLoader.js
 
-console.log('ImgFrameLoader.js loaded ok');
+//console.log('ImgFrameLoader.js loaded ok');
 
 class ImgFrameLoader {
 

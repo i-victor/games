@@ -1,7 +1,7 @@
 // Character.js
 // depends on: ImgFrameLoader
 
-console.log('Character.js loaded ok');
+//console.log('Character.js loaded ok');
 
 const Character = class {
 

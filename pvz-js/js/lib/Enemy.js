@@ -2,7 +2,7 @@
 
 // globals: enemiesTypes
 
-console.log('Enemy.js loaded ok');
+//console.log('Enemy.js loaded ok');
 
 class Enemy {
 
