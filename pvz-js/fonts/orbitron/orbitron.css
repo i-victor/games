@@ -1,0 +1,21 @@
+/* font-family: 'Orbitron' :: v17 */
+
+@font-face {
+	font-family: 'Orbitron';
+	font-style: normal;
+	font-weight: 400;
+	src: local('Orbitron'),
+		 url('Orbitron-Regular.woff2') format('woff2'),
+		 url('Orbitron-Regular.ttf') format('truetype');
+}
+
+@font-face {
+	font-family: 'Orbitron';
+	font-style: normal;
+	font-weight: 700;
+	src: local('Orbitron'),
+		 url('Orbitron-SemiBold.woff2') format('woff2'),
+		 url('Orbitron-SemiBold.ttf') format('truetype');
+}
+
+/* END */
