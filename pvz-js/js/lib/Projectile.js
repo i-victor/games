@@ -1,5 +1,7 @@
 // Projectile.js
 
+//(c) 2021 github.com/i-victor
+
 //console.log('Projectile.js loaded ok');
 
 const Projectile = class {

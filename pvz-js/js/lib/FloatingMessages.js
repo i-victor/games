@@ -1,5 +1,7 @@
 // FloatingMessages.js
 
+//(c) 2021 github.com/i-victor
+
 //console.log('FloatingMessages.js loaded ok');
 
 const FloatingMessages = class {

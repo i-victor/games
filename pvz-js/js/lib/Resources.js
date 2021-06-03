@@ -1,5 +1,7 @@
 // Resource.js
 
+//(c) 2021 github.com/i-victor
+
 //console.log('Resources.js loaded ok');
 
 const Resource = class {

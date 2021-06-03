@@ -1,5 +1,7 @@
 // ImgFrameLoader.js
 
+//(c) 2021 github.com/i-victor
+
 //console.log('ImgFrameLoader.js loaded ok');
 
 const ImgFrameLoader = class {

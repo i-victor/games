@@ -1,4 +1,7 @@
 // Character.js
+
+//(c) 2021 github.com/i-victor
+
 // depends on: ImgFrameLoader
 
 //console.log('Character.js loaded ok');

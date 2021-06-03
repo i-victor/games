@@ -1,5 +1,7 @@
 // Enemy.js
 
+//(c) 2021 github.com/i-victor
+
 // globals: enemiesTypes
 
 //console.log('Enemy.js loaded ok');
@@ -75,7 +77,7 @@ const Enemy = class {
 		}
 		ctx.fillStyle = 'black';
 		ctx.font = '30px Orbitron';
-		ctx.fillText(Math.floor(this.health), this.x + 15, this.y + 30);
+		//ctx.fillText(Math.floor(this.health), this.x + 15, this.y + 30);
 
 	}
 

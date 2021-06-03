@@ -1,6 +1,8 @@
 // Defender.js
 // depends on: Character, Resources
 
+//(c) 2021 github.com/i-victor
+
 //console.log('Defender.js loaded ok');
 
 const Defender = class {

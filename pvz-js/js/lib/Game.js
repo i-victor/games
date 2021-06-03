@@ -1,5 +1,7 @@
 // Game.js
 
+//(c) 2021 github.com/i-victor
+
 //console.log('Game.js loaded ok');
 
 const Game = class {
@@ -50,6 +52,8 @@ const Game = class {
 		const enemyPositions = [];
 		const projectiles = [];
 		const resources = [];
+
+		//let shovelSelect = false;
 
 		// mouse
 		const mouse = {
@@ -141,7 +145,7 @@ const Game = class {
 				}
 				if(resource === 1) {
 					//alert('salut');
-					if(frame % 300 === 0) {
+					if(frame % 600 === 0) {
 						//console.log('123');
 						resources.push(new Resource(canvas, cellSize, defenders[i].x, defenders[i].y, amounts)); // TODO: resources.push to change as Game.resources.push
 					}
@@ -310,7 +314,7 @@ const Game = class {
 		// resources
 
 		const handleResources = () => {
-			if(frame % 600 === 0 && score < winningScore) {
+			if(frame % 900 === 0 && score < winningScore) {
 				resources.push(new Resource(canvas, cellSize)); // random, pt ca e fara parametri
 			}
 			for(let i = 0; i < resources.length; i++) {
@@ -327,22 +331,36 @@ const Game = class {
 
 		// utilities
 
+		let sun = new Image();
+		sun.src = 'assets/sun.png';
+
 		const handleGameStatus = () => {
-			ctx.fillStyle = 'gold';
+
+			//ctx.fillStyle = 'gold';
 			ctx.font = '30px Orbitron';
-			ctx.fillText('Score: ' + score, 280, 40);
-			ctx.fillText('Resources: ' + numberOfResources, 280, 80);
+
+			ctx.fillStyle = "rgba(0, 0, 0, 0.4)";
+			ctx.lineWidth = 1;
+			ctx.fillRect(280, 15, 185, 75);
+
+			ctx.fillStyle = 'black';
+			//ctx.fillText('Score: ' + score, 280, 30);
+			ctx.drawImage(sun, 280, 10);
+			ctx.fillText(numberOfResources, 360, 60);
+
 			if(gameOver) {
 				ctx.fillStyle = 'black';
 				ctx.font = '90px Orbitron';
 				ctx.fillText('GAME OVER', 135, 330);
 			}
+
 			if(score >= winningScore && enemies.length === 0) {
 				ctx.fillStyle = 'black';
 				ctx.font = '60px Orbitron';
 				ctx.fillText('LEVEL COMPLETE', 130, 300);
 				ctx.font = '30px Orbitron';
 			}
+
 		};
 
 		canvas.addEventListener('click', () => {
@@ -384,7 +402,8 @@ const Game = class {
 
 		const bg = () => {
 			ctx.drawImage(background,0,0);
-			/*ctx.fillStyle = "rgba(0, 0, 0, 0.4)";
+			ctx.fillStyle = "rgba(0, 0, 0, 0.4)";
+			ctx.lineWidth = 1;
 			ctx.fillRect(480, 60, 240, 18);
 			ctx.drawImage(head, bar, 55);
 			if(bar < 700) {
@@ -392,7 +411,7 @@ const Game = class {
 			} else {
 				bar = 700;
 				return;
-			} */
+			}
 		};
 
 		const animate = () => {

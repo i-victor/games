@@ -1,5 +1,7 @@
 // Cell.js
 
+//(c) 2021 github.com/i-victor
+
 //console.log('Cell.js loaded ok');
 
 const Cell = class {

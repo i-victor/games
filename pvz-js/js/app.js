@@ -1,5 +1,7 @@
 // app.js
 
+//(c) 2021 github.com/i-victor
+
 'use strict';
 
 (() => {
