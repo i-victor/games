@@ -187,8 +187,10 @@ const handleShovel = () => {
 	if(mouse.clicked) {
 		if(collision(mouse, shovelCard)) {
 			shovelSelect = true;
+			} else if(chosenDefender === 1 || chosenDefender === 2 || chosenDefender === 3) {
+				shovelSelect = false;
+			}
 		}
-	}
 
 	for(let i = 0; i < defenders.length; i++) {
 
@@ -480,7 +482,7 @@ const handleShovel = () => {
 			handleGameStatus();
 			handleFloatingMessages();
 			frame+=0.5;
-			//console.log(shovelSelect);
+			console.log(chosenDefender);
 			if(!gameOver) {
 				requestAnimationFrame(animate);
 			}
