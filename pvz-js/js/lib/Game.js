@@ -53,7 +53,7 @@ const Game = class {
 		const projectiles = [];
 		const resources = [];
 
-		//let shovelSelect = false;
+		let shovelSelect = false;
 
 		// mouse
 		const mouse = {
@@ -172,6 +172,38 @@ const Game = class {
 		const cactus = new Image();
 		cactus.src = 'assets/Cactus.gif';
 
+		const shovel = new Image();
+		shovel.src = 'assets/Shovel.gif';
+
+		const shovelCard = {
+			x: 500,
+			y: 20,
+			width: 85,
+			height: 65,
+		}
+
+const handleShovel = () => {
+
+	if(mouse.clicked) {
+		if(collision(mouse, shovelCard)) {
+			shovelSelect = true;
+		}
+	}
+
+	for(let i = 0; i < defenders.length; i++) {
+
+		if(shovelSelect === true && collision(mouse, defenders[i])) {
+
+			if(mouse.clicked) {
+				defenders.splice(i, 1);
+			}
+		}
+
+
+	}
+
+}
+
 		const card1 = {
 			x: 10,
 			y: 10,
@@ -196,6 +228,9 @@ const Game = class {
 		let card1stroke = 'black';
 		let card2stroke = 'black';
 		let card3stroke = 'black';
+		let shovelCardstroke = 'black';
+
+		let chosenShovel = 1;
 
 		const chooseDefender = () => {
 
@@ -206,6 +241,8 @@ const Game = class {
 					chosenDefender = 2;
 				} else if(collision(mouse, card3)) {
 					chosenDefender = 3;
+				} else if(collision(mouse, shovelCard)) {
+					chosenDefender = 4;
 				}
 			}
 
@@ -213,18 +250,27 @@ const Game = class {
 				card1stroke = 'gold';
 				card2stroke = 'black';
 				card3stroke = 'black';
+				shovelCardstroke = 'black';
 			} else if(chosenDefender === 2) {
 				card1stroke = 'black';
 				card2stroke = 'gold';
 				card3stroke = 'black';
+				shovelCardstroke = 'black';
 			} else if(chosenDefender === 3) {
 				card1stroke = 'black';
 				card2stroke = 'black';
 				card3stroke = 'gold';
+				shovelCardstroke = 'black';
+			} else if(chosenDefender === 4) {
+				card1stroke = 'black';
+				card2stroke = 'black';
+				card3stroke = 'black';
+				shovelCardstroke = 'gold';
 			} else {
 				card1stroke = 'black';
 				card2stroke = 'black';
 				card3stroke = 'black';
+				shovelCardstroke = 'black';
 			}
 
 			ctx.lineWidth = 1;
@@ -244,6 +290,11 @@ const Game = class {
 			ctx.strokeStyle = card3stroke;
 			ctx.strokeRect(card3.x, card3.y, card3.width, card3.height);
 			ctx.drawImage(defender3, 0, 0, 194, 194, 172, 10, 194, 194);
+
+			ctx.fillRect(shovelCard.x, shovelCard.y, shovelCard.width, shovelCard.height);
+			ctx.strokeStyle = shovelCardstroke;
+			ctx.strokeRect(shovelCard.x, shovelCard.y, shovelCard.width, shovelCard.height);
+			ctx.drawImage(shovel, 0, 0, 194, 194, 505, 35, 194, 194);
 		};
 
 		// projectiles
@@ -402,7 +453,7 @@ const Game = class {
 
 		const bg = () => {
 			ctx.drawImage(background,0,0);
-			ctx.fillStyle = "rgba(0, 0, 0, 0.4)";
+/*			ctx.fillStyle = "rgba(0, 0, 0, 0.4)";
 			ctx.lineWidth = 1;
 			ctx.fillRect(480, 60, 240, 18);
 			ctx.drawImage(head, bar, 55);
@@ -411,7 +462,7 @@ const Game = class {
 			} else {
 				bar = 700;
 				return;
-			}
+			} */
 		};
 
 		const animate = () => {
@@ -424,11 +475,12 @@ const Game = class {
 			handleResources();
 			handleProjectiles();
 			handleEnemies();
+			handleShovel();
 			chooseDefender();
 			handleGameStatus();
 			handleFloatingMessages();
 			frame+=0.5;
-			//console.log(frame);
+			//console.log(shovelSelect);
 			if(!gameOver) {
 				requestAnimationFrame(animate);
 			}
