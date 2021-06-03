@@ -242,7 +242,7 @@ const handleShovel = () => {
 				} else if(collision(mouse, card3)) {
 					chosenDefender = 3;
 				} else if(collision(mouse, shovelCard)) {
-					chosenDefender = 4;
+					chosenDefender = shovel;
 				}
 			}
 
@@ -261,7 +261,7 @@ const handleShovel = () => {
 				card2stroke = 'black';
 				card3stroke = 'gold';
 				shovelCardstroke = 'black';
-			} else if(chosenDefender === 4) {
+			} else if(chosenDefender === shovel) {
 				card1stroke = 'black';
 				card2stroke = 'black';
 				card3stroke = 'black';
