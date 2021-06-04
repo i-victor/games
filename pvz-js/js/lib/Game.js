@@ -187,7 +187,7 @@ const handleShovel = () => {
 	if(mouse.clicked) {
 		if(collision(mouse, shovelCard)) {
 			shovelSelect = true;
-			} else if(chosenDefender === 1 || chosenDefender === 2 || chosenDefender === 3) {
+			} else if(chosenDefender !== shovel) {
 				shovelSelect = false;
 			}
 		}
@@ -344,9 +344,6 @@ const handleShovel = () => {
 				}
 				if(enemies[i].health <= 0) {
 					let gainedResources = enemies[i].maxHealth/10;
-					floatingMessages.push(new FloatingMessages('+' + gainedResources, enemies[i].x, enemies[i].y, 30, 'black'));
-					floatingMessages.push(new FloatingMessages('+' + gainedResources, 470, 85, 30, 'gold'));
-					numberOfResources += gainedResources;
 					score += gainedResources;
 					let findCurrentIndex = enemyPositions.indexOf(enemies[i].y);
 					enemyPositions.splice(findCurrentIndex, 1);
@@ -374,8 +371,6 @@ const handleShovel = () => {
 				resources[i].draw(ctx);
 				if(resources[i] && mouse.x && mouse.y && collision(resources[i], mouse)) {
 					numberOfResources += resources[i].amount;
-					floatingMessages.push(new FloatingMessages('+' + resources[i].amount, resources[i].x, resources[i].y, 30, 'black'));
-					floatingMessages.push(new FloatingMessages('+' + resources[i].amount, 470, 85, 30, 'gold'));
 					resources.splice(i, 1);
 					i--;
 				}
@@ -447,24 +442,10 @@ const handleShovel = () => {
 
 		const background = new Image();
 		background.src = "assets/bg.jpeg";
-
-		const head = new Image();
-		head.src = "assets/progressBar.png";
-
 		// Make sure the image is loaded first otherwise nothing will draw.
 
 		const bg = () => {
 			ctx.drawImage(background,0,0);
-/*			ctx.fillStyle = "rgba(0, 0, 0, 0.4)";
-			ctx.lineWidth = 1;
-			ctx.fillRect(480, 60, 240, 18);
-			ctx.drawImage(head, bar, 55);
-			if(bar < 700) {
-				bar+= 0.028;
-			} else {
-				bar = 700;
-				return;
-			} */
 		};
 
 		const animate = () => {
@@ -482,7 +463,7 @@ const handleShovel = () => {
 			handleGameStatus();
 			handleFloatingMessages();
 			frame+=0.5;
-			console.log(chosenDefender);
+			//console.log(chosenDefender);
 			if(!gameOver) {
 				requestAnimationFrame(animate);
 			}
