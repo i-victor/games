@@ -29,6 +29,13 @@ const Game = class {
 			return;
 		}
 
+		if(level === 1) {
+			winningScore = 200;
+		} else if(level === 2) {
+			winningScore = 400;
+		}
+
+
 		const canvas = testCanvas;
 		testCanvas = null;
 
@@ -48,16 +55,9 @@ const Game = class {
 		let gameOver = false;
 		let score = 0;
 		let winningScore = 200;
-
-		if(level === 1) {
-			winningScore = 200;
-		} else if(level === 2) {
-			winningScore = 300;
-		}
-
 		console.log(level);
 
-		//console.log(winningScore);
+		console.log(winningScore);
 
 		const gameGrid = [];
 		const defenders = [];
