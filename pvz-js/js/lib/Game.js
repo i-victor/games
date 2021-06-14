@@ -6,9 +6,12 @@
 
 const Game = class {
 
-	constructor(canvasId) { // STATIC CLASS
+	constructor(canvasId, level) { // STATIC CLASS
 		const _$name = 'Game';
 		const _$class = this;
+		if(level == undefined) {
+			level = 0;
+		}
 
 		if(canvasId == undefined) {
 			console.error(_$name, 'CanvasID is undefined ...');
@@ -44,7 +47,17 @@ const Game = class {
 		let bar = 470;
 		let gameOver = false;
 		let score = 0;
-		const winningScore = 200;
+		let winningScore = 200;
+
+		if(level === 1) {
+			winningScore = 200;
+		} else if(level === 2) {
+			winningScore = 300;
+		}
+
+		console.log(level);
+
+		//console.log(winningScore);
 
 		const gameGrid = [];
 		const defenders = [];
@@ -182,29 +195,27 @@ const Game = class {
 			height: 65,
 		}
 
-const handleShovel = () => {
-
-	if(mouse.clicked) {
-		if(collision(mouse, shovelCard)) {
-			shovelSelect = true;
-			} else if(chosenDefender !== shovel) {
-				shovelSelect = false;
-			}
-		}
-
-	for(let i = 0; i < defenders.length; i++) {
-
-		if(shovelSelect === true && collision(mouse, defenders[i])) {
+		const handleShovel = () => {
 
 			if(mouse.clicked) {
-				defenders.splice(i, 1);
+				if(collision(mouse, shovelCard)) {
+					shovelSelect = true;
+				} else if(chosenDefender !== shovel) {
+					shovelSelect = false;
+				}
 			}
+
+			for(let i = 0; i < defenders.length; i++) {
+
+				if(shovelSelect === true && collision(mouse, defenders[i])) {
+					if(mouse.clicked) {
+						defenders.splice(i, 1);
+						numberOfResources += 100;
+					}
+				}
+			}
+
 		}
-
-
-	}
-
-}
 
 		const card1 = {
 			x: 10,

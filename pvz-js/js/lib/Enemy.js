@@ -52,8 +52,8 @@ const Enemy = class {
 				this.maxFrame = 2;
 				break;
 			case 2:
-				spriteWidth = 100;
-				spriteHeight = 100;
+				spriteWidth = 98;
+				spriteHeight = 98;
 				enemyName = 'Enemy2';
 				this.maxFrame = 50;
 				break;

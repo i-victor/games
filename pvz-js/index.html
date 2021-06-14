@@ -1,13 +1,24 @@
 <!DOCTYPE html>
 <!-- (c) 2021 github.com/i-victor -->
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width+device-width, initial-scale=1.0">
-	<title>Tower Defense</title>
-	<link rel="stylesheet" href="fonts/orbitron/orbitron.css">
-	<link rel="stylesheet" href="css/styles.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width+device-width, initial-scale=1.0">
+<title>Tower Defense</title>
+<link rel="stylesheet" href="fonts/orbitron/orbitron.css">
+<link rel="stylesheet" href="css/styles.css">
+<style>
+#canvas1 {
+	display: none;
+}
+</style>
 </head>
 <body>
+	<button id="show">show</button>
+
+	<select id="levelSelect">
+		<option value="1">Level 1</option>
+		<option value="2">Level 2</option>
+	</select>
 
 	<canvas id="canvas1"></canvas>
 	<script src="js/lib/Cell.js"></script>
@@ -20,6 +31,5 @@
 	<script src="js/lib/FloatingMessages.js"></script>
 	<script src="js/lib/Game.js"></script>
 	<script src="js/app.js"></script>
-
 </body>
 </html>
