@@ -6,7 +6,7 @@
 
 const Game = class {
 
-	constructor(canvasId, level) { // STATIC CLASS
+	constructor(canvasId, world, level) { // STATIC CLASS
 		const _$name = 'Game';
 		const _$class = this;
 		if(level == undefined) {
@@ -257,7 +257,9 @@ const Game = class {
 				} else if(collision(mouse, shovelCard)) {
 					chosenDefender = shovel;
 				}
-			}
+			} else {
+					chosenDefender = 0;
+				}
 
 			if(chosenDefender === 1) {
 				card1stroke = 'gold';
@@ -380,10 +382,12 @@ const Game = class {
 			}
 			for(let i = 0; i < resources.length; i++) {
 				resources[i].draw(ctx);
-				if(resources[i] && mouse.x && mouse.y && collision(resources[i], mouse)) {
-					numberOfResources += resources[i].amount;
-					resources.splice(i, 1);
-					i--;
+				if(mouse.clicked) {
+					if(resources[i] && mouse.x && mouse.y && collision(resources[i], mouse)) {
+						numberOfResources += resources[i].amount;
+						resources.splice(i, 1);
+						i--;
+					}
 				}
 			}
 		};
