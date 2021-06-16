@@ -4,6 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width+device-width, initial-scale=1.0">
 <title>Tower Defense</title>
+<!-- jQuery, required by slick -->
+<script src="js/jquery.js"></script>
+<!-- slider -->
+<link rel="stylesheet" type="text/css" href="js/slider/lightslider.css">
+<script src="js/slider/lightslider.js"></script>
+<!-- end slider -->
 <link rel="stylesheet" href="fonts/orbitron/orbitron.css">
 <link rel="stylesheet" href="css/styles.css">
 <style>
@@ -13,28 +19,43 @@
 </style>
 </head>
 <body>
-	<button id="show">Start</button>
+<center>
+<div style="width:600px;">
+  <ul id="lightSlider">
+    <li>
+      <img id="game-world-1" src="assets/world1.jpg">
+    </li>
+    <li>
+      <img id="game-world-2" src="assets/world2.jpg">
+    </li>
+    <li>
+      <img id="game-world-3" src="assets/world3.jpg">
+    </li>
+  </ul>
+</div>
+</center>
+<button id="show">Start</button>
 
-	<select id="worldSelect">
-		<option value="1">world 1</option>
-		<option value="2">world 2</option>
-	</select>
+<select id="worldSelect">
+	<option value="1">world 1</option>
+	<option value="2">world 2</option>
+</select>
 
-	<select id="levelSelect">
-		<option value="1">Level 1</option>
-		<option value="2">Level 2</option>
-	</select>
+<select id="levelSelect">
+	<option value="1">Level 1</option>
+	<option value="2">Level 2</option>
+</select>
 
-	<canvas id="canvas1"></canvas>
-	<script src="js/lib/Cell.js"></script>
-	<script src="js/lib/ImgFrameLoader.js"></script>
-	<script src="js/lib/Character.js"></script>
-	<script src="js/lib/Resources.js"></script>
-	<script src="js/lib/Defender.js"></script>
-	<script src="js/lib/Projectile.js"></script>
-	<script src="js/lib/Enemy.js"></script>
-	<script src="js/lib/FloatingMessages.js"></script>
-	<script src="js/lib/Game.js"></script>
-	<script src="js/app.js"></script>
+<canvas id="canvas1" style="z-index:100;"></canvas>
+<script src="js/lib/Cell.js"></script>
+<script src="js/lib/ImgFrameLoader.js"></script>
+<script src="js/lib/Character.js"></script>
+<script src="js/lib/Resources.js"></script>
+<script src="js/lib/Defender.js"></script>
+<script src="js/lib/Projectile.js"></script>
+<script src="js/lib/Enemy.js"></script>
+<script src="js/lib/FloatingMessages.js"></script>
+<script src="js/lib/Game.js"></script>
+<script src="js/app.js"></script>
 </body>
 </html>
