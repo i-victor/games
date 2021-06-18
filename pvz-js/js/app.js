@@ -9,13 +9,15 @@ const startGame = (world, level) => {
 		//const level = document.getElementById('levelSelect').value;
 		document.getElementById('lightSlider').style.display = 'none';
 		document.getElementById('play').style.display = 'none';
-		document.getElementById('levelSelect').style.display = 'none';
-		console.log(world, level);
+		document.getElementById('levelSlider').style.display = 'none';
+		//console.log(world, level);
 		const game = new Game('canvas1', world, level); // run game
 
 };
 
 $(document).ready(function() {
+
+let world = 1;
 
 	$("#lightSlider").lightSlider({
 		item: 2,
@@ -25,6 +27,7 @@ $(document).ready(function() {
 	});
 
 	$('#game-world-1').on('click', () => {
+		world = 1;
 		document.getElementById("lightSlider").style.display = 'none';
 		document.getElementById("levelSlider").style.display = 'block';
 		$("#levelSlider").lightSlider({
@@ -36,62 +39,142 @@ $(document).ready(function() {
 	});
 
 	$('#game-world-2').on('click', () => {
-		startGame(2, level);
+		world = 2;
+		document.getElementById("lightSlider").style.display = 'none';
+		document.getElementById("levelSlider").style.display = 'block';
+		$("#levelSlider").lightSlider({
+			item: 2,
+			autoWidth: false,
+			slideMove: 1, // slidemove will be 1 if loop is true
+			slideMargin: 10,
+		});
 	});
 
 	$('#game-world-3').on('click', () => {
-		startGame(3, level);
+		world = 3;
 	});
 
 	$('#game-world-4').on('click', () => {
-		startGame(4, level);
+		world = 4;
+		document.getElementById("lightSlider").style.display = 'none';
+		document.getElementById("levelSlider").style.display = 'block';
+		$("#levelSlider").lightSlider({
+			item: 2,
+			autoWidth: false,
+			slideMove: 1, // slidemove will be 1 if loop is true
+			slideMargin: 10,
+		});
 	});
 
 	$('#game-world-5').on('click', () => {
-		startGame(5, level);
+		world = 5;
+		document.getElementById("lightSlider").style.display = 'none';
+		document.getElementById("levelSlider").style.display = 'block';
+		$("#levelSlider").lightSlider({
+			item: 2,
+			autoWidth: false,
+			slideMove: 1, // slidemove will be 1 if loop is true
+			slideMargin: 10,
+		});
 	});
 
 	$('#game-world-6').on('click', () => {
-		startGame(6, level);
+		world = 6;
+		document.getElementById("lightSlider").style.display = 'none';
+		document.getElementById("levelSlider").style.display = 'block';
+		$("#levelSlider").lightSlider({
+			item: 2,
+			autoWidth: false,
+			slideMove: 1, // slidemove will be 1 if loop is true
+			slideMargin: 10,
+		});
 	});
 
 	$('#game-world-7').on('click', () => {
-		startGame(7, level);
+		world = 7;
+		document.getElementById("lightSlider").style.display = 'none';
+		document.getElementById("levelSlider").style.display = 'block';
+		$("#levelSlider").lightSlider({
+			item: 2,
+			autoWidth: false,
+			slideMove: 1, // slidemove will be 1 if loop is true
+			slideMargin: 10,
+		});
 	});
 
 	$('#game-world-8').on('click', () => {
-		startGame(8, level);
+		world = 8;
+		document.getElementById("lightSlider").style.display = 'none';
+		document.getElementById("levelSlider").style.display = 'block';
+		$("#levelSlider").lightSlider({
+			item: 2,
+			autoWidth: false,
+			slideMove: 1, // slidemove will be 1 if loop is true
+			slideMargin: 10,
+		});
 	});
 
 	$('#game-world-9').on('click', () => {
-		startGame(9, level);
+		world = 9;
+		document.getElementById("lightSlider").style.display = 'none';
+		document.getElementById("levelSlider").style.display = 'block';
+		$("#levelSlider").lightSlider({
+			item: 2,
+			autoWidth: false,
+			slideMove: 1, // slidemove will be 1 if loop is true
+			slideMargin: 10,
+		});
 	});
 
 	$('#game-world-10').on('click', () => {
-		startGame(10, level);
+		world = 10;
+		document.getElementById("lightSlider").style.display = 'none';
+		document.getElementById("levelSlider").style.display = 'block';
+		$("#levelSlider").lightSlider({
+			item: 2,
+			autoWidth: false,
+			slideMove: 1, // slidemove will be 1 if loop is true
+			slideMargin: 10,
+		});
 	});
 
 	$('#game-world-11').on('click', () => {
-		startGame(11, level);
+		world = 11;
+		document.getElementById("lightSlider").style.display = 'none';
+		document.getElementById("levelSlider").style.display = 'block';
+		$("#levelSlider").lightSlider({
+			item: 2,
+			autoWidth: false,
+			slideMove: 1, // slidemove will be 1 if loop is true
+			slideMargin: 10,
+		});
 	});
 
 	$('#game-world-12').on('click', () => {
-		startGame(12, level);
+		world = 12;
+		document.getElementById("lightSlider").style.display = 'none';
+		document.getElementById("levelSlider").style.display = 'block';
+		$("#levelSlider").lightSlider({
+			item: 2,
+			autoWidth: false,
+			slideMove: 1, // slidemove will be 1 if loop is true
+			slideMargin: 10,
+		});
 	});
 
-	$('#game-level-1').on('click', () => {
+	$('#game-level-21').on('click', () => {
 		startGame(world, 1);
 	});
 
-	$('#game-level-2').on('click', () => {
+	$('#game-level-22').on('click', () => {
 		startGame(world, 2);
 	});
 
-	$('#game-level-3').on('click', () => {
+	$('#game-level-23').on('click', () => {
 		startGame(world, 3);
 	});
 
-	$('#game-level-4').on('click', () => {
+	$('#game-level-24').on('click', () => {
 		startGame(world, 4);
 	});
 

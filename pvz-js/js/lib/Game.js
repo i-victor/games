@@ -31,12 +31,21 @@ const Game = class {
 
 		let winningScore = 200;
 
+	if(world === 1) {
 		if(level === 1) {
 			winningScore = 200;
 		} else if(level === 2) {
 			winningScore = 400;
+		} else if(level === 3) {
+			winningScore = 600;
+		} else if(level === 4) {
+			winningScore = 800;
+		} else if(level === 5) {
+			winningScore = 1000;
 		}
+	}
 
+console.log(level);
 
 		const canvas = testCanvas;
 		testCanvas = null;
@@ -56,9 +65,9 @@ const Game = class {
 		let bar = 470;
 		let gameOver = false;
 		let score = 0;
-		console.log(level);
+//		console.log(level);
 
-		console.log(winningScore);
+//		console.log(winningScore);
 
 		const gameGrid = [];
 		const defenders = [];
@@ -469,8 +478,6 @@ const Game = class {
 				ctx.drawImage(background, 0, 0);
 //			}
 		};
-
-console.log('world:', world);
 
 		const animate = () => {
 			//ctx.clearRect(0, 0, canvas.width, canvas.height);
