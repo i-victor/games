@@ -29,6 +29,8 @@ const Game = class {
 			return;
 		}
 
+		let winningScore = 200;
+
 		if(level === 1) {
 			winningScore = 200;
 		} else if(level === 2) {
@@ -54,7 +56,6 @@ const Game = class {
 		let bar = 470;
 		let gameOver = false;
 		let score = 0;
-		let winningScore = 200;
 		console.log(level);
 
 		console.log(winningScore);
@@ -459,9 +460,17 @@ const Game = class {
 		background.src = "assets/bg.jpeg";
 		// Make sure the image is loaded first otherwise nothing will draw.
 
+		const background2 = new Image();
+		background2.src = "assets/bg2.jpg";
+
 		const bg = () => {
-			ctx.drawImage(background,0,0);
+
+//			if(world === 10) {
+				ctx.drawImage(background, 0, 0);
+//			}
 		};
+
+console.log('world:', world);
 
 		const animate = () => {
 			//ctx.clearRect(0, 0, canvas.width, canvas.height);
