@@ -1,0 +1,18 @@
+{
+  "name": "poker.game",
+  "version": "1.0.0",
+  "main": "main.js",
+  "devDependencies": {
+    "electron-builder": "^22.11.7"
+  },
+  "build": {
+    "appId": "your.id",
+    "mac": {
+      "category": "your.app.category.type"
+    }
+  },
+  "scripts": {
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder"
+  }
+}

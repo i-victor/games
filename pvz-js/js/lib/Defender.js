@@ -1,6 +1,10 @@
 // Defender.js
 // depends on: Character, Resources
 
+//------- Example convert a gif with max 100 frames
+// convert 'animated.gif[0-100]' frames%03d.png
+//-------
+
 //(c) 2021 github.com/i-victor
 
 //console.log('Defender.js loaded ok');
@@ -37,22 +41,21 @@ const Defender = class {
 		let characterNumber3 = null;
 
 		if(this.chosenDefender === 1) {
-			characterNumber1 = new Character(ctx, this.chosenDefender, this.shooting, this.shootNow, this.frameNum, this.x, this.y, this.width, this.height);
+			characterNumber1 = new Character(ctx, this.chosenDefender, this.shooting, this.shootNow, this.frameNum, this.x, this.y, this.width, this.height, 3);
 		} else if(this.chosenDefender === 2) {
-			characterNumber2 = new Character(ctx, this.chosenDefender, this.shooting, this.shootNow, this.frameNum, this.x, this.y, this.width, this.height);
+			characterNumber2 = new Character(ctx, this.chosenDefender, this.shooting, this.shootNow, this.frameNum, this.x, this.y, this.width, this.height, 6);
 		} else if(this.chosenDefender === 3) {
-			characterNumber3 = new Character(ctx, this.chosenDefender, this.shooting, this.shootNow, this.frameNum, this.x, this.y, this.width, this.height);
+			characterNumber3 = new Character(ctx, this.chosenDefender, this.shooting, this.shootNow, this.frameNum, this.x, this.y, this.width, this.height, 3);
 		}
 
 	} //END FUNCTION
 
 	update(frame) {
 
-		if(frame % 6 === 0) {
-			this.frameNum++;
-			if(this.frameNum % 10 === 0) {
-				this.shootNow = true;
-			}
+		this.frameNum++;
+
+		if(this.frameNum % 80 === 0) {
+			this.shootNow = true;
 		}
 
 		let projectile = 0;

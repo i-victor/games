@@ -17,7 +17,7 @@ const startGame = (world, level) => {
 
 $(document).ready(function() {
 
-let world = 1;
+	let world = 1;
 
 	$("#lightSlider").lightSlider({
 		item: 2,
@@ -31,7 +31,7 @@ let world = 1;
 		document.getElementById("lightSlider").style.display = 'none';
 		document.getElementById("levelSlider").style.display = 'block';
 		$("#levelSlider").lightSlider({
-			item: 2,
+			item: 3,
 			autoWidth: false,
 			slideMove: 1, // slidemove will be 1 if loop is true
 			slideMargin: 10,

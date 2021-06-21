@@ -8,20 +8,23 @@
 
 const Character = class {
 
-	constructor(ctx, chosenDefender, shooting, shootNow, frameNum, x, y, width, height) {
+	constructor(ctx, chosenDefender, shooting, shootNow, frameNum, x, y, width, height, speed) {
 
 		let animatedPerson = null;
 		let animatedFrame = null;
 		let spriteWidth = null;
 		let spriteHeight = null;
+		this.speed = speed;
+
+		frameNum = Math.ceil(frameNum / this.speed);
 
 		if(chosenDefender === 1) {
 		//	if(shooting) {
 		//		frameNum = 10;
 		//	}
-			spriteWidth = 70;
-			spriteHeight = 72;
-			animatedPerson = new ImgFrameLoader('characters', 'PeaShooter', 14);
+			spriteWidth = 71;
+			spriteHeight = 71;
+			animatedPerson = new ImgFrameLoader('characters', 'PeaShooter2', 25);
 			animatedFrame = animatedPerson.getImageFrame(frameNum);
 		} else if(chosenDefender === 2) {
 		//	if(shooting) {
@@ -29,12 +32,12 @@ const Character = class {
 		//	}
 			spriteWidth = 200;
 			spriteHeight = 195;
-			animatedPerson = new ImgFrameLoader('characters', 'Cactus2', 14);
+			animatedPerson = new ImgFrameLoader('characters', 'Cactus2', 15);
 			animatedFrame = animatedPerson.getImageFrame(frameNum);
 		} else if(chosenDefender === 3) {
 			spriteWidth = 74;
 			spriteHeight = 73;
-			animatedPerson = new ImgFrameLoader('characters', 'SunFlower', 14);
+			animatedPerson = new ImgFrameLoader('characters', 'SunFlower', 15);
 			animatedFrame = animatedPerson.getImageFrame(frameNum);
 		}
 

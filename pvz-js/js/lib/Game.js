@@ -45,8 +45,6 @@ const Game = class {
 		}
 	}
 
-console.log(level);
-
 		const canvas = testCanvas;
 		testCanvas = null;
 
@@ -77,6 +75,8 @@ console.log(level);
 		const resources = [];
 
 		let shovelSelect = false;
+
+console.log(enemies);
 
 		// mouse
 		const mouse = {
@@ -199,11 +199,16 @@ console.log(level);
 		shovel.src = 'assets/Shovel.gif';
 
 		const shovelCard = {
-			x: 500,
+			x: 800,
 			y: 20,
 			width: 85,
 			height: 65,
 		}
+
+		let card1stroke = 'black';
+		let card2stroke = 'black';
+		let card3stroke = 'black';
+		let shovelCardstroke = 'black';
 
 		const handleShovel = () => {
 
@@ -221,6 +226,9 @@ console.log(level);
 					if(mouse.clicked) {
 						defenders.splice(i, 1);
 						numberOfResources += 100;
+						shovelSelect = false;
+						chosenDefender = 0;
+						shovelCardstroke = 'black';
 					}
 				}
 			}
@@ -248,11 +256,6 @@ console.log(level);
 			height: 85,
 		};
 
-		let card1stroke = 'black';
-		let card2stroke = 'black';
-		let card3stroke = 'black';
-		let shovelCardstroke = 'black';
-
 		let chosenShovel = 1;
 
 		const chooseDefender = () => {
@@ -267,9 +270,9 @@ console.log(level);
 				} else if(collision(mouse, shovelCard)) {
 					chosenDefender = shovel;
 				}
-			} else {
-					chosenDefender = 0;
-				}
+		//	} else {
+		//			chosenDefender = 0;
+			}
 
 			if(chosenDefender === 1) {
 				card1stroke = 'gold';
@@ -319,7 +322,8 @@ console.log(level);
 			ctx.fillRect(shovelCard.x, shovelCard.y, shovelCard.width, shovelCard.height);
 			ctx.strokeStyle = shovelCardstroke;
 			ctx.strokeRect(shovelCard.x, shovelCard.y, shovelCard.width, shovelCard.height);
-			ctx.drawImage(shovel, 0, 0, 194, 194, 505, 35, 194, 194);
+			ctx.drawImage(shovel, 0, 0, 194, 194, 805, 35, 194, 194);
+
 		};
 
 		// projectiles
@@ -414,12 +418,12 @@ console.log(level);
 
 			ctx.fillStyle = "rgba(0, 0, 0, 0.4)";
 			ctx.lineWidth = 1;
-			ctx.fillRect(280, 15, 185, 75);
+			ctx.fillRect(580, 15, 185, 75);
 
 			ctx.fillStyle = 'black';
 			//ctx.fillText('Score: ' + score, 280, 30);
-			ctx.drawImage(sun, 280, 10);
-			ctx.fillText(numberOfResources, 360, 60);
+			ctx.drawImage(sun, 580, 10);
+			ctx.fillText(numberOfResources, 660, 60);
 
 			if(gameOver) {
 				ctx.fillStyle = 'black';
@@ -455,13 +459,16 @@ console.log(level);
 			} else if(chosenDefender === 3) {
 				defenderCost = 50;
 			}
-			if(defenderCost > 0) {
-				if(numberOfResources >= defenderCost) {
-					defenders.push(new Defender(chosenDefender, gridPositionX, gridPositionY, cellSize, cellGap));
-					numberOfResources -= defenderCost;
-				} else {
-					floatingMessages.push(new FloatingMessages('Need more resources', mouse.x, mouse.y, 20, 'red'));
+			if(chosenDefender > 0) {
+				if(defenderCost > 0) {
+					if(numberOfResources >= defenderCost) {
+						defenders.push(new Defender(chosenDefender, gridPositionX, gridPositionY, cellSize, cellGap));
+						numberOfResources -= defenderCost;
+					} else {
+						floatingMessages.push(new FloatingMessages('Need more resources', mouse.x, mouse.y, 20, 'red'));
+					}
 				}
+				chosenDefender = 0;
 			}
 		});
 
@@ -480,7 +487,7 @@ console.log(level);
 		};
 
 		const animate = () => {
-			//ctx.clearRect(0, 0, canvas.width, canvas.height);
+			ctx.clearRect(0, 0, canvas.width, canvas.height);
 			//ctx.fillStyle = 'blue';
 			//ctx.fillRect(0,0,controlsBar.width, controlsBar.height);
 			bg();

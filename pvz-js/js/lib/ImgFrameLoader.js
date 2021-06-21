@@ -8,13 +8,15 @@ const ImgFrameLoader = class {
 
 	constructor(type, name, maxFrame) {
 
+		this.initialized = false;
+
 		this.type = String(type);
 
 		this.name = String(name);
 
 		this.maxFrame = Math.floor(maxFrame);
-		if(this.maxFrame <= 0) {
-			this.maxFrame = 0;
+		if(this.maxFrame <= 1) {
+			this.maxFrame = 1;
 		}
 
 		this.frames = [];
@@ -24,11 +26,21 @@ const ImgFrameLoader = class {
 	getImageFrame(frameNumber) {
 
 		frameNumber = Math.floor(frameNumber % this.maxFrame);
-		if(frameNumber <= 0) {
-			frameNumber = 0;
+		if(frameNumber <= 1) {
+			frameNumber = 1;
 		}
 		if(frameNumber > this.maxFrame) {
-			frameNumber = 0;
+			frameNumber = 1;
+		}
+
+		if(this.initialized !== true) {
+			for(var i=0; i<this.maxFrame; i++) {
+				if(this.frames[i] == undefined) {
+					this.frames[i] = new Image();
+					this.frames[i].src = 'assets/' + this.type + '/' + this.name + '/frames0' + (i > 9 ? i : '0' + i) + '.png';
+				}
+			}
+			this.initialized = true;
 		}
 
 		if(frameNumber >= 0) {

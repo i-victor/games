@@ -49,20 +49,20 @@ const Enemy = class {
 				spriteWidth = 106;
 				spriteHeight = 126;
 				enemyName = 'Enemy4';
-				this.maxFrame = 2;
+				this.maxFrame = 3;
 				break;
 			case 2:
 				spriteWidth = 98;
 				spriteHeight = 98;
 				enemyName = 'Enemy2';
-				this.maxFrame = 50;
+				this.maxFrame = 51;
 				break;
 			case 1:
 			default:
 				spriteWidth = 50;
 				spriteHeight = 50;
 				enemyName = 'Enemy';
-				this.maxFrame = 15;
+				this.maxFrame = 16;
 		}
 		if(!enemyName) {
 			return;
@@ -70,6 +70,7 @@ const Enemy = class {
 
 		animatedPerson = new ImgFrameLoader('enemies', enemyName, this.maxFrame);
 		animatedFrame = animatedPerson.getImageFrame(this.frameNum);
+//console.log(animatedFrame);
 
 		if(animatedFrame) {
 			ctx.drawImage(animatedFrame, 0, 0, spriteWidth, spriteHeight, this.x, this.y, this.width, this.height);
