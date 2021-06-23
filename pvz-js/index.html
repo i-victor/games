@@ -13,14 +13,17 @@
 <link rel="stylesheet" href="fonts/orbitron/orbitron.css">
 <link rel="stylesheet" href="css/styles.css">
 <style>
-#canvas1 {
+#game-canvas {
 	display: none;
 }
 
-#levelSlider {
+#container-levelSlider {
 	display: none;
 }
 
+#container-deckSelect {
+	display: none;
+}
 </style>
 </head>
 <body>
@@ -28,68 +31,68 @@
 <button id="play">Play</button>
 
 <center>
-<div style="width:600px;">
-  <ul id="lightSlider">
-    <li>
-      <img id="game-world-1" src="assets/world1.png">
-    </li>
-    <li>
-      <img id="game-world-2" src="assets/world2.png">
-    </li>
-    <li>
-      <img id="game-world-3" src="assets/world3.png">
-    </li>
-        <li>
-      <img id="game-world-4" src="assets/world4.png">
-    </li>
-        <li>
-      <img id="game-world-5" src="assets/world5.png">
-    </li>
-        <li>
-      <img id="game-world-6" src="assets/world6.png">
-    </li>
-        <li>
-      <img id="game-world-7" src="assets/world7.png">
-    </li>
-        <li>
-      <img id="game-world-8" src="assets/world8.png">
-    </li>
-        <li>
-      <img id="game-world-9" src="assets/world9.png">
-    </li>
-        <li>
-      <img id="game-world-10" src="assets/world10.png">
-    </li>
-        <li>
-      <img id="game-world-11" src="assets/world11.png">
-    </li>
-        <li>
-      <img id="game-world-12" src="assets/world12.png">
-    </li>
-  </ul>
+<div id="container-worldSelect" style="width: 92vw;">
+	<ul id="slider-worldSelect">
+		<li>
+			<img id="game-world-1" src="assets/world1.png">
+		</li>
+		<li>
+			<img id="game-world-2" src="assets/world2.png">
+		</li>
+		<li>
+			<img id="game-world-3" src="assets/world3.png">
+		</li>
+				<li>
+			<img id="game-world-4" src="assets/world4.png">
+		</li>
+				<li>
+			<img id="game-world-5" src="assets/world5.png">
+		</li>
+				<li>
+			<img id="game-world-6" src="assets/world6.png">
+		</li>
+				<li>
+			<img id="game-world-7" src="assets/world7.png">
+		</li>
+				<li>
+			<img id="game-world-8" src="assets/world8.png">
+		</li>
+				<li>
+			<img id="game-world-9" src="assets/world9.png">
+		</li>
+				<li>
+			<img id="game-world-10" src="assets/world10.png">
+		</li>
+				<li>
+			<img id="game-world-11" src="assets/world11.png">
+		</li>
+				<li>
+			<img id="game-world-12" src="assets/world12.png">
+		</li>
+	</ul>
+</div>
+<div id="container-levelSlider" style="width:600px;">
+	<ul id="slider-levelSlider">
+		<li>
+			<img id="game-level-21" src="assets/level21.jpeg">
+		</li>
+				<li>
+			<img id="game-level-22" src="assets/level22.jpeg">
+		</li>
+				<li>
+			<img id="game-level-23" src="assets/level23.jpeg">
+		</li>
+				<li>
+			<img id="game-level-24" src="assets/level24.jpeg">
+		</li>
+	</ul>
+</div>
+<div id="container-deckSelect">
+	<h1>Select Deck</h1>
 </div>
 </center>
 
-<center>
-<div style="width:600px;">
-  <ul id="levelSlider">
-    <li>
-      <img id="game-level-21" src="assets/level21.jpeg">
-    </li>
-        <li>
-      <img id="game-level-22" src="assets/level22.jpeg">
-    </li>
-        <li>
-      <img id="game-level-23" src="assets/level23.jpeg">
-    </li>
-        <li>
-      <img id="game-level-24" src="assets/level24.jpeg">
-    </li>
-  </ul>
-</div>
-</center>
-
-<canvas id="canvas1" style="z-index:100;"></canvas>
+<canvas id="game-canvas" style="z-index:100;"></canvas>
 <script src="js/lib/Cell.js"></script>
 <script src="js/lib/ImgFrameLoader.js"></script>
 <script src="js/lib/Character.js"></script>
