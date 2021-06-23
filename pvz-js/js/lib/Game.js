@@ -76,7 +76,7 @@ const Game = class {
 
 		let shovelSelect = false;
 
-console.log(enemies);
+//console.log(enemies);
 
 		// mouse
 		const mouse = {
