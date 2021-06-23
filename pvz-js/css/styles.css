@@ -15,3 +15,10 @@ body {
 	height: 600px;
 	font-family: 'Orbitron', sans-serif;
 }
+
+img.card {
+	width: 100px;
+	height: 100px;
+}
+
+/* END */

@@ -8,28 +8,66 @@ $(document).ready(() => {
 
 	let startWorld = 1;
 	let startLevel = 1;
+	let gameDeck = [];
 
-	const startGame = (level) => {
-			startLevel = level;
-			document.getElementById('play').style.display = 'none';
-			//const level = document.getElementById('levelSelect').value;
-			document.getElementById("container-deckSelect").style.display = 'none';
-			document.getElementById('container-worldSelect').style.display = 'none';
-			document.getElementById('container-levelSlider').style.display = 'none';
-			document.getElementById("game-canvas").style.display = 'block';
-			console.log('World:', startWorld, 'Level:', startLevel);
-			const game = new Game('game-canvas', startWorld, startLevel); // run game
+	const startGame = () => {
+		$('#play').hide();
+		//const level = document.getElementById('levelSelect').value;
+		$('#container-deckSelect').hide();
+		$('#container-worldSelect').hide();
+		$('#container-levelSlider').hide();
+		$('#game-canvas').show();
+		console.log('World:', startWorld, 'Level:', startLevel);
+		const game = new Game('game-canvas', startWorld, startLevel); // run game
+	};
+
+	$('#button-startGame').on('click', () => {
+		deckSelect();
+	});
+
+	const deckSelect = () => {
+		console.log(gameDeck);
+		if(gameDeck.length < 2) {
+			alert('Must select 2 characters !');
+			return;
+		}
+		startGame();
 	};
 
 	const levelSelect = (level) => {
-		startGame(level);
+		startLevel = level;
+		$('#container-deckSelect').show();
+		$('#container-deckSelect img.card').imgCheckbox({
+			onclick: ($el, isSelected) => {
+				const id = $el.find('img').attr('id');
+				console.log(id, isSelected);
+				if(isSelected === true) {
+					if(gameDeck.length < 2) {
+						gameDeck.push(id);
+					} else {
+						gameDeck.shift();
+					}
+				} else {
+					let tmpArr = [];
+					for(let i=0; i<gameDeck.length; i++) {
+						if(gameDeck[i] !== id) {
+							tmpArr.push(gameDeck[i]);
+						}
+					}
+					gameDeck = tmpArr;
+					tmpArr = null;
+				}
+			}
+		});
+		$('#container-worldSelect').hide();
+		$('#container-levelSlider').hide();
 	};
 
 	const worldSelect = (world) => {
 		startWorld = world;
-		document.getElementById("container-deckSelect").style.display = 'none';
-		document.getElementById("container-worldSelect").style.display = 'none';
-		document.getElementById("container-levelSlider").style.display = 'block';
+		$('#container-deckSelect').hide();
+		$('#container-worldSelect').hide();
+		$('#container-levelSlider').show();
 		$("#slider-levelSlider").lightSlider({
 			item: 2,
 			autoWidth: false,
