@@ -6,7 +6,7 @@
 
 const Game = class {
 
-	constructor(canvasId, world, level) { // STATIC CLASS
+	constructor(canvasId, world, level, gameDeck) { // STATIC CLASS
 		const _$name = 'Game';
 		const _$class = this;
 		if(level == undefined) {
@@ -144,6 +144,16 @@ const Game = class {
 
 		let defenderArray = [];
 
+	//	console.log(gameDeck);
+		let defender = null;
+		for(let d=0; d<gameDeck.length; d++) {
+			defender = new Image();
+			defender.src = 'assets/characters/' + gameDeck[d] + '.png';
+			defenderArray.push(defender);
+		}
+		defender = null;
+
+		/*
 		const defender1 = new Image();
 		defender1.src = 'assets/characters/PeaShooter/frames000.png'; // convert 'PeaShooter.gif[0-14]' frames%03d.png
 		defenderArray.push(defender1);
@@ -155,6 +165,7 @@ const Game = class {
 		const defender3 = new Image();
 		defender3.src = 'assets/characters/SunFlower/frames000.png'; // convert 'SunFlower.gif[0-14]' frames%03d.png
 		defenderArray.push(defender3);
+		*/
 
 		const amounts = [ 50 ];
 
@@ -250,9 +261,9 @@ const Game = class {
 		};
 
 		const card3 = {
-			x:170,
-			y:10,
-			width:70,
+			x: 170,
+			y: 10,
+			width: 70,
 			height: 85,
 		};
 
@@ -304,20 +315,32 @@ const Game = class {
 			ctx.lineWidth = 1;
 			ctx.fillStyle = "rgba(0, 0, 0, 0.4)";
 
-			ctx.fillRect(card1.x, card1.y, card1.width, card1.height);
-			ctx.strokeStyle = card1stroke;
-			ctx.strokeRect(card1.x, card1.y, card1.width, card1.height);
-			ctx.drawImage(defender1, 0, 0, 194, 194, 6, 12, 194, 194);
-
-			ctx.fillRect(card2.x, card2.y, card2.width, card2.height);
-			ctx.strokeStyle = card2stroke;
-			ctx.strokeRect(card2.x, card2.y, card2.width, card2.height);
-			ctx.drawImage(cactus, 0, 0, 194, 194, 90, 7, 160, 184);
-
-			ctx.fillRect(card3.x, card3.y, card3.width, card3.height);
-			ctx.strokeStyle = card3stroke;
-			ctx.strokeRect(card3.x, card3.y, card3.width, card3.height);
-			ctx.drawImage(defender3, 0, 0, 194, 194, 172, 10, 194, 194);
+			//--
+			for(let d=0; d<defenderArray.length; d++) {
+				switch(d) {
+					case 0:
+						ctx.fillRect(card1.x, card1.y, card1.width, card1.height);
+						ctx.strokeStyle = card1stroke;
+						ctx.strokeRect(card1.x, card1.y, card1.width, card1.height);
+						ctx.drawImage(defenderArray[d], 0, 0, 194, 194, 12, 14, 194, 194);
+						break;
+					case 1:
+						ctx.fillRect(card2.x, card2.y, card2.width, card2.height);
+						ctx.strokeStyle = card2stroke;
+						ctx.strokeRect(card2.x, card2.y, card2.width, card2.height);
+						ctx.drawImage(defenderArray[d], 0, 0, 194, 194, 92, 14, 194, 194);
+						break;
+					case 2:
+						ctx.fillRect(card3.x, card3.y, card3.width, card3.height);
+						ctx.strokeStyle = card3stroke;
+						ctx.strokeRect(card3.x, card3.y, card3.width, card3.height);
+						ctx.drawImage(defenderArray[d], 0, 0, 194, 194, 172, 14, 194, 194);
+						break;
+					default:
+						// skip
+				}
+			}
+			//--
 
 			ctx.fillRect(shovelCard.x, shovelCard.y, shovelCard.width, shovelCard.height);
 			ctx.strokeStyle = shovelCardstroke;

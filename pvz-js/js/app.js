@@ -18,7 +18,7 @@ $(document).ready(() => {
 		$('#container-levelSlider').hide();
 		$('#game-canvas').show();
 		console.log('World:', startWorld, 'Level:', startLevel);
-		const game = new Game('game-canvas', startWorld, startLevel); // run game
+		const game = new Game('game-canvas', startWorld, startLevel, gameDeck); // run game
 	};
 
 	$('#button-startGame').on('click', () => {
