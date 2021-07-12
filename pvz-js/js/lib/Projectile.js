@@ -17,9 +17,11 @@ const Projectile = class {
 
 		this.bullet = null;
 		if(this.chosenBullet == 1) {
+			this.power = 20;
 			this.bullet = new Image();
 			this.bullet.src = 'assets/Bullet.png';
 		} else if(this.chosenBullet == 2) {
+			this.power = 25;
 			this.bullet = new Image();
 			this.bullet.src = 'assets/Bullet2.png';
 		}

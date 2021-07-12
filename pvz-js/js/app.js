@@ -38,14 +38,15 @@ $(document).ready(() => {
 		startLevel = level;
 		$('#container-deckSelect').show();
 		$('#container-deckSelect img.card').imgCheckbox({
+			maxSelect: 2, // allow select max 2 cards
 			onclick: ($el, isSelected) => {
 				const id = $el.find('img').attr('id');
 				console.log(id, isSelected);
 				if(isSelected === true) {
 					if(gameDeck.length < 2) {
 						gameDeck.push(id);
-					} else {
-						gameDeck.shift();
+					} else if(gameDeck.length > 2) {
+						gameDeck.pop();
 					}
 				} else {
 					let tmpArr = [];

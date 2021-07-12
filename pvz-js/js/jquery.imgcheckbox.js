@@ -7,11 +7,13 @@
  * License: GPLv2
  * Author:  James Cuénod
  *
- * modified by iVictor, r.20210623
+ * modified by i-victor, r.20210712
+ * added options param: maxSelect (to limit max selection)
  *
  */
 
 (function($) {
+	var MAX_SELECTION = 0;
 	var CHK_TOGGLE = 0;
 	var CHK_SELECT = 1;
 	var CHK_DESELECT = 2;
@@ -66,6 +68,10 @@
 	};
 
 	var imgCheckboxClass = function(element, options, id) {
+		MAX_SELECTION = Math.ceil(options.maxSelect || 0);
+		if((MAX_SELECTION < 0) || isNaN(MAX_SELECTION) || (!isFinite(MAX_SELECTION))) {
+			MAX_SELECTION = 0;
+		}
 		var $wrapperElement, $finalStyles = {}, grayscaleStyles = {
 			"span.imgCheckbox img": {
 				"transform": "scale(1)",
@@ -272,9 +278,31 @@
 					$chosenElement.removeClass("imgChked");
 					break;
 				case CHK_TOGGLE:
+					if($chosenElement.hasClass("imgChked")) { // deselect
+						// leave as is
+					} else { // select
+						var selectedNum = 0;
+						$(".imgChked").each(function(){
+							selectedNum += 1;
+						});
+						if(MAX_SELECTION > 0) {
+							if(selectedNum >= MAX_SELECTION) {
+								return false;
+							}
+						}
+					}
 					$chosenElement.toggleClass("imgChked");
 					break;
 				case CHK_SELECT:
+					var selectedNum = 0;
+					$(".imgChked").each(function(){
+						selectedNum += 1;
+					});
+					if(MAX_SELECTION > 0) {
+						if(selectedNum >= MAX_SELECTION) {
+							return false;
+						}
+					}
 					$chosenElement.addClass("imgChked");
 					break;
 			}
@@ -340,6 +368,7 @@
 		"onload": false,
 		"onclick": false,
 		"debugMessages": false,
+		"maxSelect": 0 // must be >= 0 ; if 0 will allow unlimited selection ; by example, if 2, will allow selecting just 2 items (by i-victor)
 	};
 	var defaultStyles = {
 		"span.imgCheckbox img": {
