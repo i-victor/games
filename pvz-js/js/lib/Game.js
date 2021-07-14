@@ -218,7 +218,6 @@ const Game = class {
 
 		let card1stroke = 'black';
 		let card2stroke = 'black';
-		let card3stroke = 'black';
 		let shovelCardstroke = 'black';
 
 		const handleShovel = () => {
@@ -251,6 +250,7 @@ const Game = class {
 			y: 10,
 			width: 70,
 			height: 85,
+			defender: 0,
 		};
 
 		const card2 = {
@@ -258,13 +258,7 @@ const Game = class {
 			y: 10,
 			width: 70,
 			height: 85,
-		};
-
-		const card3 = {
-			x: 170,
-			y: 10,
-			width: 70,
-			height: 85,
+			defender: 0,
 		};
 
 		let chosenShovel = 1;
@@ -273,71 +267,63 @@ const Game = class {
 
 			if(mouse.clicked) {
 				if(collision(mouse, card1)) {
-					chosenDefender = 1;
+					console.log('Card1', card1.defender);
+					chosenDefender = card1.defender;
+					card1stroke = 'gold';
+					card2stroke = 'black';
+					shovelCardstroke = 'black';
 				} else if(collision(mouse, card2)) {
-					chosenDefender = 2;
-				} else if(collision(mouse, card3)) {
-					chosenDefender = 3;
+					console.log('Card2', card2.defender);
+					chosenDefender = card2.defender;
+					card1stroke = 'black';
+					card2stroke = 'gold';
+					shovelCardstroke = 'black';
 				} else if(collision(mouse, shovelCard)) {
 					chosenDefender = shovel;
+					card1stroke = 'black';
+					card2stroke = 'black';
+					shovelCardstroke = 'gold';
 				}
 		//	} else {
 		//			chosenDefender = 0;
 			}
 
-			if(chosenDefender === 1) {
-				card1stroke = 'gold';
-				card2stroke = 'black';
-				card3stroke = 'black';
-				shovelCardstroke = 'black';
-			} else if(chosenDefender === 2) {
-				card1stroke = 'black';
-				card2stroke = 'gold';
-				card3stroke = 'black';
-				shovelCardstroke = 'black';
-			} else if(chosenDefender === 3) {
-				card1stroke = 'black';
-				card2stroke = 'black';
-				card3stroke = 'gold';
-				shovelCardstroke = 'black';
-			} else if(chosenDefender === shovel) {
-				card1stroke = 'black';
-				card2stroke = 'black';
-				card3stroke = 'black';
-				shovelCardstroke = 'gold';
-			} else {
-				card1stroke = 'black';
-				card2stroke = 'black';
-				card3stroke = 'black';
-				shovelCardstroke = 'black';
-			}
-
 			ctx.lineWidth = 1;
 			ctx.fillStyle = "rgba(0, 0, 0, 0.4)";
 
+			const getDefenderNumByName = (name) => {
+console.log('getDefenderNumByName:', name);
+				switch(name) {
+					case 'PeaShooter2':
+						return 1;
+					case 'Cactus2':
+						return 2;
+					case 'SunFlower':
+						return 3;
+					case 'StarFruit':
+						return 4;
+				}
+				return 0;
+			};
+
 			//--
+			let defenderNum = 0;
 			for(let d=0; d<defenderArray.length; d++) {
-				switch(d) {
-					case 0:
-						ctx.fillRect(card1.x, card1.y, card1.width, card1.height);
-						ctx.strokeStyle = card1stroke;
-						ctx.strokeRect(card1.x, card1.y, card1.width, card1.height);
-						ctx.drawImage(defenderArray[d], 0, 0, 194, 194, 12, 14, 194, 194);
-						break;
-					case 1:
-						ctx.fillRect(card2.x, card2.y, card2.width, card2.height);
-						ctx.strokeStyle = card2stroke;
-						ctx.strokeRect(card2.x, card2.y, card2.width, card2.height);
-						ctx.drawImage(defenderArray[d], 0, 0, 194, 194, 92, 14, 194, 194);
-						break;
-					case 2:
-						ctx.fillRect(card3.x, card3.y, card3.width, card3.height);
-						ctx.strokeStyle = card3stroke;
-						ctx.strokeRect(card3.x, card3.y, card3.width, card3.height);
-						ctx.drawImage(defenderArray[d], 0, 0, 194, 194, 172, 14, 194, 194);
-						break;
-					default:
-						// skip
+				defenderNum += 1;
+				if(defenderNum === 1) {
+					card1.defender = getDefenderNumByName(gameDeck[0]);
+					ctx.fillRect(card1.x, card1.y, card1.width, card1.height);
+					ctx.strokeStyle = card1stroke;
+					ctx.strokeRect(card1.x, card1.y, card1.width, card1.height);
+					ctx.drawImage(defenderArray[d], 0, 0, 194, 194, 12, 14, 194, 194);
+				} else if(defenderNum === 2) {
+					card2.defender = getDefenderNumByName(gameDeck[1]);
+					ctx.fillRect(card2.x, card2.y, card2.width, card2.height);
+					ctx.strokeStyle = card2stroke;
+					ctx.strokeRect(card2.x, card2.y, card2.width, card2.height);
+					ctx.drawImage(defenderArray[d], 0, 0, 194, 194, 92, 14, 194, 194);
+				} else {
+					break;
 				}
 			}
 			//--
@@ -481,6 +467,8 @@ const Game = class {
 				defenderCost = 250;
 			} else if(chosenDefender === 3) {
 				defenderCost = 50;
+			} else if(chosenDefender === 4) {
+				defenderCost = 150;
 			}
 			if(chosenDefender > 0) {
 				if(defenderCost > 0) {
