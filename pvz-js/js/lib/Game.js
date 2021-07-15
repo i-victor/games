@@ -283,9 +283,11 @@ const Game = class {
 					card1stroke = 'black';
 					card2stroke = 'black';
 					shovelCardstroke = 'gold';
+				} else {
+					card1stroke = 'black';
+					card2stroke = 'black';
+					shovelCardstroke = 'black';
 				}
-		//	} else {
-		//			chosenDefender = 0;
 			}
 
 			ctx.lineWidth = 1;
@@ -302,6 +304,8 @@ console.log('getDefenderNumByName:', name);
 						return 3;
 					case 'StarFruit':
 						return 4;
+					case 'SeaShroom':
+						return 5;
 				}
 				return 0;
 			};
@@ -469,6 +473,8 @@ console.log('getDefenderNumByName:', name);
 				defenderCost = 50;
 			} else if(chosenDefender === 4) {
 				defenderCost = 150;
+			} else if(chosenDefender === 5) {
+				defenderCost = 200;
 			}
 			if(chosenDefender > 0) {
 				if(defenderCost > 0) {

@@ -10,8 +10,8 @@ const Projectile = class {
 		this.chosenBullet = chosenBullet;
 		this.x = x;
 		this.y = y;
-		this.width = 10;
-		this.height = 10;
+		this.width = 120;
+		this.height = 120;
 		this.power = 20;
 		this.speed = 5;
 
@@ -28,6 +28,10 @@ const Projectile = class {
 			this.power = 35;
 			this.bullet = new Image();
 			this.bullet.src = 'assets/Bullet3.png';
+		} else if(this.chosenBullet == 4) {
+			this.power = 45;
+			this.bullet = new Image();
+			this.bullet.src = 'assets/Bullet5.gif';
 		}
 
 	}
