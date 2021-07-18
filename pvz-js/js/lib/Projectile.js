@@ -10,8 +10,8 @@ const Projectile = class {
 		this.chosenBullet = chosenBullet;
 		this.x = x;
 		this.y = y;
-		this.width = 120;
-		this.height = 120;
+		this.width = 10;
+		this.height = 10;
 		this.power = 20;
 		this.speed = 5;
 
