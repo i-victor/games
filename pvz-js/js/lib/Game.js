@@ -218,6 +218,7 @@ const Game = class {
 
 		let card1stroke = 'black';
 		let card2stroke = 'black';
+		let card3stroke = 'black';
 		let shovelCardstroke = 'black';
 
 		const handleShovel = () => {
@@ -261,6 +262,14 @@ const Game = class {
 			defender: 0,
 		};
 
+		const card3 = {
+			x: 170,
+			y: 10,
+			width: 70,
+			height: 85,
+			defender: 0,
+		};
+
 		let chosenShovel = 1;
 
 		const chooseDefender = () => {
@@ -271,21 +280,32 @@ const Game = class {
 					chosenDefender = card1.defender;
 					card1stroke = 'gold';
 					card2stroke = 'black';
+					card3stroke = 'black';
 					shovelCardstroke = 'black';
 				} else if(collision(mouse, card2)) {
 					console.log('Card2', card2.defender);
 					chosenDefender = card2.defender;
 					card1stroke = 'black';
 					card2stroke = 'gold';
+					card3stroke = 'black';
 					shovelCardstroke = 'black';
-				} else if(collision(mouse, shovelCard)) {
+				} else if(collision(mouse, card3)) {
+					console.log('Card3', card3.defender);
+					chosenDefender = card3.defender;
+					card1stroke = 'black';
+					card2stroke = 'black';
+					card3stroke = 'gold';
+					shovelCardstroke = 'black';
+				}else if(collision(mouse, shovelCard)) {
 					chosenDefender = shovel;
 					card1stroke = 'black';
 					card2stroke = 'black';
+					card3stroke = 'black';
 					shovelCardstroke = 'gold';
 				} else {
 					card1stroke = 'black';
 					card2stroke = 'black';
+					card3stroke = 'black';
 					shovelCardstroke = 'black';
 				}
 			}
@@ -326,6 +346,12 @@ console.log('getDefenderNumByName:', name);
 					ctx.strokeStyle = card2stroke;
 					ctx.strokeRect(card2.x, card2.y, card2.width, card2.height);
 					ctx.drawImage(defenderArray[d], 0, 0, 194, 194, 92, 14, 194, 194);
+				} else if(defenderNum === 3) {
+					card3.defender = getDefenderNumByName(gameDeck[2]);
+					ctx.fillRect(card3.x, card3.y, card3.width, card3.height);
+					ctx.strokeStyle = card3stroke;
+					ctx.strokeRect(card3.x, card3.y, card3.width, card3.height);
+					ctx.drawImage(defenderArray[d], 0, 0, 194, 194, 172, 14, 194, 194);
 				} else {
 					break;
 				}

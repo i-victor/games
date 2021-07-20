@@ -27,8 +27,8 @@ $(document).ready(() => {
 
 	const deckSelect = () => {
 		console.log(gameDeck);
-		if(gameDeck.length < 2) {
-			alert('Must select 2 characters !');
+		if(gameDeck.length < 3) {
+			alert('Must select 3 characters !');
 			return;
 		}
 		startGame();
@@ -38,14 +38,14 @@ $(document).ready(() => {
 		startLevel = level;
 		$('#container-deckSelect').show();
 		$('#container-deckSelect img.card').imgCheckbox({
-			maxSelect: 2, // allow select max 2 cards
+			maxSelect: 3, // allow select max 2 cards
 			onclick: ($el, isSelected) => {
 				const id = $el.find('img').attr('id');
 				console.log(id, isSelected);
 				if(isSelected === true) {
-					if(gameDeck.length < 2) {
+					if(gameDeck.length < 3) {
 						gameDeck.push(id);
-					} else if(gameDeck.length > 2) {
+					} else if(gameDeck.length > 3) {
 						gameDeck.pop();
 					}
 				} else {
