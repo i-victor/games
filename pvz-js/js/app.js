@@ -38,7 +38,7 @@ $(document).ready(() => {
 		startLevel = level;
 		$('#container-deckSelect').show();
 		$('#container-deckSelect img.card').imgCheckbox({
-			maxSelect: 3, // allow select max 2 cards
+			maxSelect: 3, // allow select max 3 cards
 			onclick: ($el, isSelected) => {
 				const id = $el.find('img').attr('id');
 				console.log(id, isSelected);

@@ -326,6 +326,8 @@ console.log('getDefenderNumByName:', name);
 						return 4;
 					case 'SeaShroom':
 						return 5;
+					case 'LotusRoot':
+						return 6;
 				}
 				return 0;
 			};
@@ -501,6 +503,8 @@ console.log('getDefenderNumByName:', name);
 				defenderCost = 150;
 			} else if(chosenDefender === 5) {
 				defenderCost = 200;
+			} else if(chosenDefender === 6) {
+				defenderCost = 100;
 			}
 			if(chosenDefender > 0) {
 				if(defenderCost > 0) {

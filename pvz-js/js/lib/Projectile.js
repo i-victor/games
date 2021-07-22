@@ -32,6 +32,10 @@ const Projectile = class {
 			this.power = 45;
 			this.bullet = new Image();
 			this.bullet.src = 'assets/Bullet5.gif';
+		} else if(this.chosenBullet == 5) {
+			this.power = 30;
+			this.bullet = new Image();
+			this.bullet.src = 'assets/Bullet6.gif';
 		}
 
 	}

@@ -49,6 +49,11 @@ const Character = class {
 			spriteHeight = 66;
 			animatedPerson = new ImgFrameLoader('characters', 'SeaShroom', 10);
 			animatedFrame = animatedPerson.getImageFrame(frameNum);
+		} else if(chosenDefender === 6) {
+			spriteWidth = 130;
+			spriteHeight = 114;
+			animatedPerson = new ImgFrameLoader('characters', 'LotusRoot', 30);
+			animatedFrame = animatedPerson.getImageFrame(frameNum);
 		}
 
 		if(animatedFrame) {
