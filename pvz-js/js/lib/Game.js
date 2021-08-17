@@ -332,6 +332,8 @@ console.log('getDefenderNumByName:', name);
 						return 7;
 					case 'GloomShroom':
 						return 8;
+					case 'HeadButter':
+						return 9;
 				}
 				return 0;
 			};
@@ -513,6 +515,8 @@ console.log('getDefenderNumByName:', name);
 				defenderCost = 200;
 			} else if(chosenDefender === 8) {
 				defenderCost = 150;
+			} else if(chosenDefender === 9) {
+				defenderCost = 200;
 			}
 			if(chosenDefender > 0) {
 				if(defenderCost > 0) {

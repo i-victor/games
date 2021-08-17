@@ -44,6 +44,7 @@ const Defender = class {
 		let characterNumber6 = null;
 		let characterNumber7 = null;
 		let characterNumber8 = null;
+		let characterNumber9 = null;
 
 		if(this.chosenDefender === 1) {
 			characterNumber1 = new Character(ctx, this.chosenDefender, this.shooting, this.shootNow, this.frameNum, this.x, this.y, this.width, this.height, 3);
@@ -61,6 +62,8 @@ const Defender = class {
 			characterNumber7 = new Character(ctx, this.chosenDefender, this.shooting, this.shootNow, this.frameNum, this.x, this.y, this.width, this.height, 3);
 		} else if(this.chosenDefender === 8) {
 			characterNumber8 = new Character(ctx, this.chosenDefender, this.shooting, this.shootNow, this.frameNum, this.x, this.y, this.width, this.height, 3);
+		} else if(this.chosenDefender === 9) {
+			characterNumber9 = new Character(ctx, this.chosenDefender, this.shooting, this.shootNow, this.frameNum, this.x, this.y, this.width, this.height, 5);
 		}
 
 	} //END FUNCTION
@@ -89,6 +92,8 @@ const Defender = class {
 			} else if(this.chosenDefender === 7) {
 				projectile = 6;
 			} else if(this.chosenDefender === 8) {
+				projectile = 6;
+			} else if(this.chosenDefender === 9) {
 				projectile = 6;
 			}
 			this.shootNow = false;
