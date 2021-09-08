@@ -90,9 +90,9 @@ const Defender = class {
 			} else if(this.chosenDefender === 6) {
 				projectile = 5;
 			} else if(this.chosenDefender === 7) {
-				projectile = 6;
+				projectile = 7;
 			} else if(this.chosenDefender === 8) {
-				projectile = 6;
+				projectile = 8;
 			} else if(this.chosenDefender === 9) {
 				projectile = 6;
 			}
