@@ -29,9 +29,16 @@ const Game = class {
 			return;
 		}
 
+		let bgImg = 'assets/bg1.jpeg';
 		let winningScore = 200;
 
-	if(world === 1) {
+		if(world === 1) {
+			bgImg = 'assets/bg1.jpeg';
+		} else if(world === 2) {
+			bgImg = 'assets/bg2.jpeg';
+		}
+
+
 		if(level === 1) {
 			winningScore = 200;
 		} else if(level === 2) {
@@ -43,7 +50,6 @@ const Game = class {
 		} else if(level === 5) {
 			winningScore = 1000;
 		}
-	}
 
 		const canvas = testCanvas;
 		testCanvas = null;
@@ -531,25 +537,20 @@ console.log('getDefenderNumByName:', name);
 			}
 		});
 
-		const background = new Image();
-		background.src = "assets/bg.jpeg";
-		// Make sure the image is loaded first otherwise nothing will draw.
-
-		const background2 = new Image();
-		background2.src = "assets/bg2.jpg";
-
-		const bg = () => {
-
+//		const bg = () => {
 //			if(world === 10) {
-				ctx.drawImage(background, 0, 0);
+//				const background = new Image();
+//				background.src = "assets/bg.jpeg";
+//				ctx.drawImage(background, 0, 0);
 //			}
-		};
+//		};
 
 		const animate = () => {
 			ctx.clearRect(0, 0, canvas.width, canvas.height);
 			//ctx.fillStyle = 'blue';
 			//ctx.fillRect(0,0,controlsBar.width, controlsBar.height);
-			bg();
+			const level = new Levels(ctx, bgImg, {}, winningScore);
+		//	bg();
 			handleGameGrid();
 			handleDefenders();
 			handleResources();
