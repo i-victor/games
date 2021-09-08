@@ -3,6 +3,8 @@ const Levels = class {
 
 	constructor(ctx, backgroundImage, enemyTypesObj, winPointsNum) {
 
+		console.log('WiningScore:', winPointsNum);
+
 		let theErr = 0;
 		const validateBgImg = (value) => {
 			if(typeof(value) != 'string') {
