@@ -340,6 +340,8 @@ console.log('getDefenderNumByName:', name);
 						return 8;
 					case 'HeadButter':
 						return 9;
+					case 'ShadowShooter':
+						return 10;
 				}
 				return 0;
 			};
@@ -522,6 +524,8 @@ console.log('getDefenderNumByName:', name);
 			} else if(chosenDefender === 8) {
 				defenderCost = 150;
 			} else if(chosenDefender === 9) {
+				defenderCost = 200;
+			} else if(chosenDefender === 10) {
 				defenderCost = 200;
 			}
 			if(chosenDefender > 0) {

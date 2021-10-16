@@ -69,6 +69,11 @@ const Character = class {
 			spriteHeight = 49;
 			animatedPerson = new ImgFrameLoader('characters', 'HeadButter', 76);
 			animatedFrame = animatedPerson.getImageFrame(frameNum);
+		} else if(chosenDefender === 10) {
+			spriteWidth = 100;
+			spriteHeight = 100;
+			animatedPerson = new ImgFrameLoader('characters', 'ShadowShooter', 6);
+			animatedFrame = animatedPerson.getImageFrame(frameNum);
 		}
 
 		if(animatedFrame) {

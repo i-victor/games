@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Tower Defense</title>
+	<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=yes">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+	<script src="js/lib/phaser.min.js"></script>
+	<script src="js/setup/storage.js"></script>
+	<script src="js/setup/global.js"></script>
+	<script src="js/setup/preload.js"></script>
+
+	<!-- Other -->
+	<script src="js/towers.js"></script>
+	<script src="js/ammo.js"></script>
+	<script src="js/enemy.js"></script>
+	<script src="js/button.js"></script>
+
+	<!-- Menus -->
+	<script src="js/menus/towerMenu.js"></script>
+	<script src="js/menus/mainMenu.js"></script>
+	<script src="js/menus/levelComplete.js"></script>
+	<script src="js/menus/gameOver.js"></script>
+	<script src="js/menus/pauseMenu.js"></script>
+	<script src="js/menus/sellUpgrade.js"></script>
+	<script src="js/menus/levelSelect.js"></script>
+
+	<!-- Levels -->
+	<script src="js/levels/level1.js"></script>
+	<script src="js/levels/level2.js"></script>
+	<script src="js/levels/level3.js"></script>
+	<script src="js/levels/level4.js"></script>
+	<script src="js/levels/level5.js"></script>
+	<script src="js/levels/level6.js"></script>
+	<script src="js/levels/level7.js"></script>
+	<script src="js/levels/level8.js"></script>
+	<script src="js/levels/level9.js"></script>
+
+<style>
+	html,
+	body {
+		margin: 0;
+		padding: 0;
+		-ms-interpolation-mode: nearest-neighbor;
+		image-rendering: -webkit-optimize-contrast;
+		image-rendering: -webkit-crisp-edges;
+		image-rendering: -moz-crisp-edges;
+		image-rendering: -o-crisp-edges;
+		image-rendering: pixelated;
+		background-color: #22C71D;
+	}
+
+	#content {
+		background-color: #22C71D;
+	}
+
+</style>
+</head>
+<body>
+	<div id="content" style="display: block; width: 100%; text-align: center"></div>
+	<script src="js/setup/game.js"></script>
+</body>
+</html>
